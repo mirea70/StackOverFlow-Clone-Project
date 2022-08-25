@@ -1,0 +1,239 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+}
+
+#nav {
+  border: solid green 2px;
+}
+
+/* main css 영역 시작 */
+#main {
+  /* border: solid black 2px; */
+  height: 100%;
+}
+
+.login_container {
+  background-color: #f1f2f3;
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  height: 100%;
+}
+
+.login_main_container {
+  width: 288.45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.login_logo_container {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 24px;
+}
+
+.login_social_container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.login_social_container > button {
+  padding: 10.4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border-radius: 0.5em;
+  border-width: 2px;
+}
+
+.login_basic_container {
+  background-color: #ffffff;
+  padding: 24px;
+  margin-bottom: 24px;
+  border-radius: 0.5em;
+  box-shadow: 5px 5px 5px #e7e8e9;
+  font-size: 13px;
+}
+
+.login_basic_wrapper > div {
+  display: flex;
+  flex-direction: column;
+  margin: 6px 0px;
+}
+
+.id_label,
+.pw_label {
+  font-size: 15px;
+  font-weight: bold;
+  margin: 2px 0px;
+}
+
+.login_basic_wrapper > div > div > input {
+  padding: 7.8px 9.1px;
+  width: 100%;
+}
+
+.password_upper_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login_button {
+  padding: 10.4px;
+  margin: 2px 0px;
+  background-color: #0995fe;
+  border-radius: 0.2em;
+  border: 1px solid transparent;
+  color: #ffffff;
+}
+
+.login_button:hover {
+  padding: 10.4px;
+  margin: 2px 0px;
+  background-color: #0e5d99;
+  border-radius: 0.2em;
+  border: 1px solid transparent;
+  color: #ffffff;
+}
+
+/* main css 영역 끝 */
+
+/* footer css 영역 시작 */
+#footer {
+  display: flex;
+  background-color: #232629;
+  padding: 32px 12px 12px 12px;
+  justify-content: space-between;
+  align-items: stretch;
+
+  @media only screen and (max-width: 980px) {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+#footer_main_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+}
+
+#logo_container {
+  width: 64px;
+  height: 100%;
+  margin-top: -10px;
+  font-size: 30px;
+}
+
+#logo_container > i {
+  font-size: 50px;
+  padding: 10px;
+  margin-right: 20px;
+}
+
+#menu_container {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+
+  @media only screen and (max-width: 980px) {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0px 0px 12px 0px;
+  }
+}
+
+#menu_container :last-child {
+  width: 160%;
+}
+
+.menu_wrapper {
+  height: 100%;
+  width: 100%;
+  padding: 0px 12px 24px 0px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.menu_wrapper > h5 {
+  font-size: 13px;
+  color: #babfc3;
+  margin: 0px 0px 12px 0px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.menu_inside_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 0px;
+  @media only screen and (max-width: 980px) {
+    flex-direction: row;
+  }
+}
+
+.menu_inside_wrapper > li {
+  list-style: none;
+  padding-left: 0px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #7a8188;
+  padding: 4px 0px;
+}
+
+#info_container {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+
+  color: #7a8188;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  @media only screen and (max-width: 980px) {
+    width: 100%;
+
+    > ul {
+      justify-content: flex-start;
+    }
+    > p {
+      margin: 0px;
+    }
+  }
+}
+
+#info_container > ul {
+  display: flex;
+  margin: 0px;
+  padding-left: 0px;
+  justify-content: space-between;
+  align-items: stretch;
+}
+#info_container > ul > li {
+  list-style: none;
+  font-size: 11px;
+  padding: 0px 5px 0px 0px;
+}
+#info_container > p {
+  font-size: 11px;
+  width: 100%;
+  text-align: left;
+  margin: auto 0px 24px 0px;
+}
+
+/* footer css 영역 끝 */
