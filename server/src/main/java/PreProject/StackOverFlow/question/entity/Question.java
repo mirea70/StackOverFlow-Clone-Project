@@ -1,5 +1,6 @@
 package PreProject.StackOverFlow.question.entity;
 
+import PreProject.StackOverFlow.basetime.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 //@DynamicInsert
 @Builder
 @Getter
-public class Question {
+public class Question extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
