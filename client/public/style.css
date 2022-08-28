@@ -37,15 +37,15 @@ nav {
   margin-right: 10px;
 }
 
-@media (min-width: 991px) and (max-width : 1400px) {
+@media (min-width: 991px) and (max-width: 1400px) {
   .hidenav {
-      display: none;
-  } 
+    display: none;
+  }
 }
 @media (max-width: 991px) {
   .hideicon {
-      display: none;
-  } 
+    display: none;
+  }
 }
 .btn {
   width: 90px;
@@ -314,3 +314,94 @@ nav {
 
 /* footer css 영역 끝 */
 
+/* main css 시작 */
+main {
+  background-color: #ffffff;
+  border: solid black 2px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+#main_left_container {
+  width: 164px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 24px;
+  font-size: 13px;
+}
+
+#sideNav {
+  border: 0px;
+}
+
+.sideNav_links {
+  margin-bottom: 12px;
+  list-style: none;
+  padding: 0px;
+}
+
+.sideNav_home {
+  padding: 4px 4px 4px 8px;
+  height: 34px;
+  color: #525960;
+}
+.sideNav_home:hover {
+  font-weight: bold;
+  color: #525960;
+}
+
+.sideNav_public_wrapper {
+  margin-bottom: 12px;
+  padding: 0px;
+}
+.sideNav_public_title {
+  margin: 16px 0px 4px 8px;
+  font-size: 11px;
+}
+
+.sideNav_public_wrapper > li > a {
+  padding: 4px 4px 4px 30px;
+}
+.sideNav_links > li {
+  list-style: none;
+}
+.sideNav_links > li > ul {
+  list-style: none;
+}
+
+.sideNav_links > li > ul > li {
+  list-style: none;
+  height: 34px;
+}
+
+.sideNav_links > li > ul > li:first-of-type {
+  list-style: none;
+  height: 16px;
+}
+
+.sideNav_links > li > ul > li:not(:first-of-type):hover {
+  list-style: none;
+  height: 34px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.sideNav_links > li > ul > li > a {
+  list-style: none;
+  height: 34px;
+  color: #838c95;
+}
+
+/* main 오른쪽 css시작 */
+#qd_container {
+  border-left: 1px solid #d6d9dc;
+  max-width: 1100px;
+  width: calc(100% - 164px);
+  padding: 24px 16px;
+}
+/* main 오른쪽 css끝 */
+
+/* main css 끝 */
