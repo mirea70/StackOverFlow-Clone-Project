@@ -1,22 +1,21 @@
-package PreProject.StackOverFlow.question.dto;
+package PreProject.StackOverFlow.answer.dto;
 
 import PreProject.StackOverFlow.member.entity.Member;
+import PreProject.StackOverFlow.question.entity.Question;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
-
 @Getter
-public class QuestionDto {
+public class AnswerDto {
 
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
     public static class Response {
-        private Long question_id;
+        private Long answer_id;
 
         private String title;
 
@@ -24,7 +23,9 @@ public class QuestionDto {
 
         private int vote;
 
-        private int view;
+        private Question question;
+
+        private Member member;
     }
 
     @Builder
@@ -32,13 +33,14 @@ public class QuestionDto {
     @AllArgsConstructor
     @Getter
     public static class Post {
-        private Long question_id;
-
-        private Member member;
 
         private String title;
 
         private String contents;
+
+        private Question question;
+
+        private Member member;
     }
 
     @Builder
@@ -46,12 +48,14 @@ public class QuestionDto {
     @AllArgsConstructor
     @Getter
     public static class Patch {
-        private Long question_id;
-
-        private Member member;
+        private Long answer_id;
 
         private String title;
 
         private String contents;
+
+        private Question question;
+
+        private Member member;
     }
 }

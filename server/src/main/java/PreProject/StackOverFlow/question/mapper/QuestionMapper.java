@@ -5,6 +5,8 @@ import PreProject.StackOverFlow.question.dto.QuestionDto;
 import PreProject.StackOverFlow.question.entity.Question;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
 
@@ -14,4 +16,5 @@ public interface QuestionMapper {
 
     QuestionDto.Response questionToQuestionResponse(Question question);
 
+    List<QuestionDto.Response> questionsToQuestionResponseDtos(List<Question> questions);
 }

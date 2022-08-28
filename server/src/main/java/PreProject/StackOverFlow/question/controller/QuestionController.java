@@ -1,13 +1,17 @@
 package PreProject.StackOverFlow.question.controller;
 
+import PreProject.StackOverFlow.dto.MultiResponseDto;
 import PreProject.StackOverFlow.question.dto.QuestionDto;
 import PreProject.StackOverFlow.question.entity.Question;
 import PreProject.StackOverFlow.question.mapper.QuestionMapper;
 import PreProject.StackOverFlow.question.service.QuestionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/question")
@@ -33,7 +37,11 @@ public class QuestionController {
 
     @GetMapping("list")
     public ResponseEntity get_list(@RequestParam int page, @RequestParam int size) {
-        return null;
+        Page<Question> page_list = questionService.get_list_Service(page, size);
+        List<Question> finded_list = page_list.getContent();
+
+        return new ResponseEntity<>(new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(finded_list), page_list)
+        , HttpStatus.OK);
     }
 
     @PatchMapping

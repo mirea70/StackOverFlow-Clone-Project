@@ -4,6 +4,9 @@ package PreProject.StackOverFlow.question.service;
 import PreProject.StackOverFlow.question.entity.Question;
 import PreProject.StackOverFlow.question.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,12 +22,19 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
+
+
     @Transactional(readOnly = true)
     public Question read_Service(Long question_id) {
         Question finded = questionRepository.findById(question_id).orElseThrow(
                 () -> new IllegalArgumentException("해당 질문 글을 찾을 수 없습니다."));
         finded.update_view_cnt();
         return finded;
+    }
+
+    public Page<Question> get_list_Service(int page, int size) {
+        return questionRepository.findAll(PageRequest.of(page - 1, size,
+                Sort.by("question_id").descending()));
     }
 
     public void modify_Service(Question question) {
