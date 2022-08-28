@@ -1,5 +1,6 @@
 package PreProject.StackOverFlow.question.dto;
 
+import PreProject.StackOverFlow.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,7 +32,7 @@ public class QuestionDto {
     public static class Post {
         private Long question_id;
 
-        private Long member_id;
+        private Member member;
 
         private String title;
 
@@ -45,7 +46,7 @@ public class QuestionDto {
     public static class Patch {
         private Long question_id;
 
-        private Long member_id;
+        private Member member;
 
         private String title;
 

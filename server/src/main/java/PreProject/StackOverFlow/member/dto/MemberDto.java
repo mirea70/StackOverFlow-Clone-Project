@@ -25,7 +25,7 @@ public class MemberDto {
     @Getter
     @AllArgsConstructor
     public static class Patch{
-        private long memberId;
+        private long member_Id;
 
         @NotSpace
         private String name;
@@ -38,8 +38,8 @@ public class MemberDto {
 
         private String about;
 
-        public void setMemberId(long memberId){
-            this.memberId = memberId;
+        public void setMemberId(long member_Id){
+            this.member_Id = member_Id;
         }
     }
     @Getter

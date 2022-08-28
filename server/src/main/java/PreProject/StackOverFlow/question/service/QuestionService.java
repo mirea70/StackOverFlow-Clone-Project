@@ -30,7 +30,7 @@ public class QuestionService {
         // 수정 요청한 유저가 작성자 본인인지 확인한다.
         Question finded = read_Service(question.getQuestion_id());
 
-        if(question.getMember_id() != finded.getMember_id()) {
+        if(question.getMember().getMember_Id() != finded.getMember().getMember_Id()) {
             throw new IllegalArgumentException("작성자 본인이 아닙니다.");
         }
         // 본인이 맞으면 글을 수정한다.
@@ -42,7 +42,7 @@ public class QuestionService {
         // 삭제 요청한 유저가 작성자 본인인지 확인한다.
         Question finded = read_Service(question.getQuestion_id());
 
-        if(question.getMember_id() != finded.getMember_id()) {
+        if(question.getMember().getMember_Id() != finded.getMember().getMember_Id()) {
             throw new IllegalArgumentException("작성자 본인이 아닙니다.");
         }
         // 본인이 맞으면 글을 삭제한다.

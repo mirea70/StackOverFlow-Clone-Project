@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.is;
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 //@ActiveProfiles("realdb")
-public class QuestionRepositoryTest {
+public class AnswerRepositoryTest {
     @Autowired
     QuestionRepository questionRepository;
 

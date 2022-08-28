@@ -29,7 +29,7 @@ public class MemberService {
     }
 
     public Member updateMember(Member member) {
-        Member findMember = findVerifiedMember(member.getMemberId());
+        Member findMember = findVerifiedMember(member.getMember_Id());
 
         Optional.ofNullable(member.getName())
                 .ifPresent(name -> findMember.setName(name));
@@ -45,12 +45,12 @@ public class MemberService {
         return memberRepository.save(findMember);
     }
 
-    public Member findMember(long memberId) {
-        return findVerifiedMember(memberId);
+    public Member findMember(long member_Id) {
+        return findVerifiedMember(member_Id);
     }
 
-    public Member findVerifiedMember(long memberId) {
-        Optional<Member> optionalMember = memberRepository.findById(memberId);
+    public Member findVerifiedMember(long member_Id) {
+        Optional<Member> optionalMember = memberRepository.findById(member_Id);
 
         Member member = optionalMember.orElseThrow(() ->
                 new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
