@@ -21,6 +21,9 @@ public class MemberDto {
 
         @NotBlank
         private String password;
+
+        @NotBlank
+        private String profile_image;
     }
     @Getter
     @AllArgsConstructor

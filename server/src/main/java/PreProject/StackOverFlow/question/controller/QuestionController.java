@@ -31,6 +31,11 @@ public class QuestionController {
         return new ResponseEntity<>(mapper.questionToQuestionResponse(finded), HttpStatus.OK);
     }
 
+    @GetMapping("list")
+    public ResponseEntity get_list(@RequestParam int page, @RequestParam int size) {
+        return null;
+    }
+
     @PatchMapping
     public ResponseEntity modify(@RequestBody QuestionDto.Patch patch) {
         questionService.modify_Service(mapper.questionPatchToQuestion(patch));
