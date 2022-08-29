@@ -121,7 +121,7 @@ const makeContent = (target, data, parent) => {
   qd_lower_info_control.className = "qd_lower_info_control";
   const button_arr = ["Share", "Edit", "Follow"];
   for (let button of button_arr) {
-    let qd_lower_info_control_button = document.createElement("button");
+    let qd_lower_info_control_button = document.createElement("a");
     qd_lower_info_control_button.innerText = button;
     qd_lower_info_control.appendChild(qd_lower_info_control_button);
   }
@@ -155,6 +155,20 @@ qd_lower_left_container.appendChild(qd_lower_question_container);
 if (answer_data.length > 0) {
   const qd_lower_answer_container = document.createElement("div");
   qd_lower_answer_container.className = "qd_lower_answer_container";
+
+  const qd_lower_answer_header = document.createElement("div");
+  qd_lower_answer_header.className = "qd_lower_answer_header";
+  const qd_lower_answer_header_main = document.createElement("div");
+  qd_lower_answer_header_main.className = "qd_lower_answer_header_main";
+  const qd_lower_answer_header_main_title = document.createElement("h2");
+  qd_lower_answer_header_main_title.className =
+    "qd_lower_answer_header_main_title";
+  qd_lower_answer_header_main_title.innerText = `${answer_data.length} Answers`;
+  qd_lower_answer_header_main.appendChild(qd_lower_answer_header_main_title);
+  qd_lower_answer_header.appendChild(qd_lower_answer_header_main);
+  qd_lower_answer_container.appendChild(qd_lower_answer_header);
+  //   const qd_lower_answer_header_filter = document.createElement("div");
+  //   qd_lower_answer_header_filter.className = "qd_lower_answer_header_filter";
 
   for (let answer of answer_data) {
     const qd_lower_answer_wrapper = document.createElement("div");
