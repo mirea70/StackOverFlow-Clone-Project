@@ -318,7 +318,6 @@ nav {
 main {
   background-color: #ffffff;
   border: solid black 2px;
-  height: 500px;
   display: flex;
   justify-content: center;
   align-items: stretch;

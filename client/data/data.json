@@ -1,0 +1,63 @@
+{
+  "question": [
+    {
+      "question_id": 0,
+      "member_id": 1,
+      "title": "question_test_title",
+      "contents": "question_test_content",
+      "writer": "user1",
+      "created_at": "2022-08-19T23:15:30.000Z",
+      "modified_at": "2022-08-19T23:15:30.000Z",
+      "vote": 0,
+      "view": 0,
+      "tags": "javascript css"
+    }
+  ],
+  "answer": [
+    {
+      "answer_id": 0,
+      "question_id": 0,
+      "member_id": 2,
+      "title": "answer_test_title",
+      "contents": "answer_test_title_content",
+      "vote": 0,
+      "created_at": "2022-08-20T23:15:30.000Z",
+      "modified_at": "2022-08-20T23:15:30.000Z",
+      "writer": "user2"
+    },
+    {
+      "answer_id": 1,
+      "question_id": 0,
+      "member_id": 3,
+      "title": "answer_test2_title",
+      "contents": "answer_test2_title_content",
+      "vote": 0,
+      "created_at": "2022-08-23T23:15:30.000Z",
+      "modified_at": "2022-08-23T23:15:30.000Z",
+      "writer": "user2"
+    }
+  ],
+  "member": [
+    {
+      "member_id": 1,
+      "name": "user1",
+      "email": "user1@test.com",
+      "password": "user1pwd",
+      "profile_image": ""
+    },
+    {
+      "member_id": 2,
+      "name": "user2",
+      "email": "user2@test.com",
+      "password": "user2pwd",
+      "profile_image": ""
+    },
+    {
+      "member_id": 3,
+      "name": "user3",
+      "email": "user3@test.com",
+      "password": "user3pwd",
+      "profile_image": ""
+    }
+  ]
+}
