@@ -318,7 +318,6 @@ nav {
 main {
   background-color: #ffffff;
   border: solid black 2px;
-  height: 500px;
   display: flex;
   justify-content: center;
   align-items: stretch;
@@ -400,8 +399,188 @@ main {
   border-left: 1px solid #d6d9dc;
   max-width: 1100px;
   width: calc(100% - 164px);
-  padding: 24px 16px;
+  padding: 24px 0px;
+  display: flex;
 }
 /* main 오른쪽 css끝 */
+
+/* 게시글 */
+.qd_left_container {
+  width: 75%;
+}
+.qd_rigth_container {
+  width: 25%;
+  background-color: blue;
+}
+.Toptitle {
+  height: 150px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.aQaskQ, .aQaskQ2 {
+  display: flex;
+  justify-content: space-between;
+}
+.allQuestion{
+  color: #232629;
+  font-size: 32px;
+}
+.askQuestion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 18px;
+  color: white;
+  background-color: #0a95ff;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  border-top: 3px solid #6cbfff;
+}
+.askQuestion:hover {
+  background-color: #0074cc;
+  color: white;
+}
+.aQaskQ2 {
+  margin-top: 20px;
+}
+#questions {
+  font-size: 24px;
+  color: #232629;
+}
+.filterButton {
+  background-color: #e1ecf4;
+  padding: 5px;
+  border-radius: 5px;
+  color: #39739d;
+  border: 1px solid #7aa7c7;
+}
+.filterButton:hover {
+  background-color: #b3d3ea;
+}
+
+.boardContent {
+  display: flex;
+  padding: 10px 10px 20px 10px;
+  border-top: 1px solid #d6d9dc;
+}
+.boardView {
+  width: 15%;
+  text-align: right;
+  padding-right: 10px;
+  padding-top: 5px;
+}
+.boardMain {
+  width: 85%;
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.boardtitle {
+  width: 100%;
+  font-size: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  text-align: left;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2 ;
+  -webkit-box-orient: vertical;
+}
+.boardtext {
+  width: 100%;
+  height: 50px;
+  margin-top: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  text-align: left;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2 ;
+  -webkit-box-orient: vertical;
+}
+.tagMaker {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+.boardTag {
+  display: flex;
+}
+.tag {
+  background-color: #d0e3fe;
+  color: #39739d;
+  padding: 2px 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+.boardMaker {
+  display: flex;
+}
+.makerName {
+  margin-right: 5px;
+  color: #0a95ff;
+}
+.makerTime {
+  margin-left: 5px;
+  color: #525960;
+}
+
+.gesipan_page {
+  background-color: transparent;
+}
+.gesipan_page_r {
+  width: 100%;
+  height: 50px;
+  max-width: 1300px;
+  display: flex;
+  justify-content: center;
+}
+.gesipan_page_button_p {
+  background-color: transparent;
+  border: 0px;
+  height: 25px;
+  margin-top: 15px;
+}
+.gesipan_page_button_n {
+  background-color: transparent;
+  border: 0px;
+  height: 25px;
+  margin-top: 15px;
+}
+.gesipan_page_button_p:hover {
+  background-color: black;
+  color: white;
+}
+.gesipan_page_button_n:hover {
+  background-color: black;
+  color: white;
+}
+.gesipan_button {
+  background-color: transparent;
+  border: 0px;
+  width: 50px;
+  margin-top: 15px;
+}
+@media (max-width: 767px) {
+  .gesipan_button {
+      width: 30px;
+  }
+}
+
+.gesipan_button:hover {
+  background-color: black;
+  color: white;
+}
+.hide {
+  display: none;
+}
+/* 게시글 */
+
+
 
 /* main css 끝 */
