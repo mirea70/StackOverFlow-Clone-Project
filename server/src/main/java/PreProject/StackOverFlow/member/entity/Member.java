@@ -24,10 +24,10 @@ public class Member extends BaseTimeEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false, updatable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String password;
 
     @Column

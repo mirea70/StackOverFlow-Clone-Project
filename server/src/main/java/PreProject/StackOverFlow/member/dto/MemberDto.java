@@ -15,8 +15,8 @@ public class MemberDto {
         @NotBlank
         private String name;
 
-        @Email
         @NotBlank
+        @Email
         private String email;
 
         @NotBlank
@@ -56,5 +56,13 @@ public class MemberDto {
         private String profile_imgae;
         private String job;
         private String about;
+    }
+
+    // login 전용 DTO 추가
+    @Getter
+    @AllArgsConstructor
+    public static class Login{
+        private String email;
+        private String password;
     }
 }
