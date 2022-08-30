@@ -29,31 +29,29 @@ public class QuestionService {
         return finded;
     }
 
-    public Page<Question> get_list_Service(int page, int size) {
-        return questionRepository.findAll(PageRequest.of(page - 1, size,
-                Sort.by("question_id").descending()));
+    public Page<Question> get_list_Service(int page) {
+        return questionRepository.findAll(PageRequest.of(page - 1, 10,
+                Sort.by("questionId").descending()));
     }
 
     public void modify_Service(Question question) {
         // 수정 요청한 유저가 작성자 본인인지 확인한다.
         Question finded = read_Service(question.getQuestionId());
 
-        if(question.getMember().getMemberId() != finded.getMember().getMemberId()) {
+        if (question.getMember().getMemberId() != finded.getMember().getMemberId()) {
             throw new IllegalArgumentException("작성자 본인이 아닙니다.");
         }
+
         // 본인이 맞으면 글을 수정한다.
         finded.update_Question(question.getTitle(), question.getContents());
 //        questionRepository.save(finded);
     }
 
-    public void delete_Service(Question question) {
+    public void delete_Service(Long questionId) {
         // 해당 게시글이 존재하는지 확인한다.
-        Question finded = questionRepository.findById(question.getQuestionId()).orElseThrow(
+        Question finded = questionRepository.findById(questionId).orElseThrow(
                 () -> new IllegalArgumentException("해당 질문 글을 찾을 수 없습니다."));
-        // 삭제 요청한 유저가 작성자 본인인지 확인한다.
-        if(question.getMember().getMemberId() != finded.getMember().getMemberId()) {
-            throw new IllegalArgumentException("작성자 본인이 아닙니다.");
-        }
+
         // 본인이 맞으면 글을 삭제한다.
         questionRepository.delete(finded);
     }

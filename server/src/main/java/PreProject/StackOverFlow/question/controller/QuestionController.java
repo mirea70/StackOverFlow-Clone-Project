@@ -1,12 +1,12 @@
 package PreProject.StackOverFlow.question.controller;
 
 import PreProject.StackOverFlow.dto.MultiResponseDto;
+import PreProject.StackOverFlow.member.service.MemberService;
 import PreProject.StackOverFlow.question.dto.QuestionDto;
 import PreProject.StackOverFlow.question.entity.Question;
 import PreProject.StackOverFlow.question.entity.Question_Tag;
 import PreProject.StackOverFlow.question.mapper.QuestionMapper;
 import PreProject.StackOverFlow.question.service.QuestionService;
-import PreProject.StackOverFlow.question.service.QuestionTagService;
 import PreProject.StackOverFlow.tag.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,8 +24,9 @@ import java.util.stream.Collectors;
 public class QuestionController {
     private final QuestionService questionService;
     private final QuestionMapper mapper;
-
     private final TagRepository tagRepository;
+
+    private final MemberService memberService;
 
     // 질문 등록
     @PostMapping("/write")
@@ -48,14 +48,14 @@ public class QuestionController {
     }
 
     @GetMapping("/{question_id}")
-    public ResponseEntity read(@PathVariable Long question_id) {
-        Question finded = questionService.read_Service(question_id);
+    public ResponseEntity read(@PathVariable Long questionId) {
+        Question finded = questionService.read_Service(questionId);
         return new ResponseEntity<>(mapper.questionToQuestionResponse(finded), HttpStatus.OK);
     }
 
     @GetMapping("list")
-    public ResponseEntity get_list(@RequestParam int page, @RequestParam int size) {
-        Page<Question> page_list = questionService.get_list_Service(page, size);
+    public ResponseEntity get_list(@RequestParam("page") int page) {
+        Page<Question> page_list = questionService.get_list_Service(page);
         List<Question> finded_list = page_list.getContent();
 
         return new ResponseEntity<>(new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(finded_list), page_list)
@@ -64,14 +64,15 @@ public class QuestionController {
 
     @PatchMapping
     public ResponseEntity modify(@RequestBody QuestionDto.Patch patch) {
+
         questionService.modify_Service(mapper.questionPatchToQuestion(patch));
 
         return new ResponseEntity<>("수정이 완료되었습니다.", HttpStatus.OK);
     }
 
     @DeleteMapping
-    public ResponseEntity delete(@RequestBody QuestionDto.Patch delete) {
-        questionService.delete_Service(mapper.questionPatchToQuestion(delete));
+    public ResponseEntity delete(@RequestParam("questionId") Long questionId) {
+        questionService.delete_Service(questionId);
         return new ResponseEntity<>("삭제가 완료되었습니다.", HttpStatus.NO_CONTENT);
     }
 }

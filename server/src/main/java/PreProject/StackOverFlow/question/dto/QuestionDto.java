@@ -62,7 +62,7 @@ public class QuestionDto {
     public static class Patch {
         private Long questionId;
 
-        private Member member;
+        private Long memberId;
 
         private String title;
 

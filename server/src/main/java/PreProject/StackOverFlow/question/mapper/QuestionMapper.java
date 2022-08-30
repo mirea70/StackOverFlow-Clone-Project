@@ -37,7 +37,18 @@ public interface QuestionMapper {
         return question;
     }
 
-    Question questionPatchToQuestion(QuestionDto.Patch patch);
+    default Question questionPatchToQuestion(QuestionDto.Patch patch){
+        Question question = new Question();
+        Member member = new Member();
+        member.setMemberId(patch.getMemberId());
+
+        question.setQuestionId(patch.getQuestionId());
+        question.setTitle(patch.getTitle());
+        question.setContents(patch.getContents());
+        question.setMember(member);
+
+        return question;
+    }
 
     QuestionDto.Response questionToQuestionResponse(Question question);
 
