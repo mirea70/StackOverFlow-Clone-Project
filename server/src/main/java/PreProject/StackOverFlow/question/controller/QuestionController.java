@@ -3,30 +3,48 @@ package PreProject.StackOverFlow.question.controller;
 import PreProject.StackOverFlow.dto.MultiResponseDto;
 import PreProject.StackOverFlow.question.dto.QuestionDto;
 import PreProject.StackOverFlow.question.entity.Question;
+import PreProject.StackOverFlow.question.entity.Question_Tag;
 import PreProject.StackOverFlow.question.mapper.QuestionMapper;
 import PreProject.StackOverFlow.question.service.QuestionService;
+import PreProject.StackOverFlow.question.service.QuestionTagService;
+import PreProject.StackOverFlow.tag.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/question")
 @RequiredArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
-
     private final QuestionMapper mapper;
 
-    @PostMapping
-    public ResponseEntity write(@RequestBody QuestionDto.Post post) {
+    private final TagRepository tagRepository;
 
-       Question writed = questionService.write_Service(mapper.questionPostToQuestion(post));
+    // 질문 등록
+    @PostMapping("/write")
+    public ResponseEntity write(@RequestBody QuestionDto.PostA postA) {
+        // postA에서 String 으로 받은 tag 이름들 split해서 tagRepository를 통해 각각 Tag객체 얻어온 후
+        // QuestionDto.Post 객체로 변환하여 QuestionMapper를 통해 Question으로 변환.
+        // QuestionMapper에 questionPostToQuestion()메서드 임의로 정의하였음.
+        Question question = new Question();
+        List<Question_Tag> tags = Arrays.stream(postA.getQuestionTagNames().split(" "))
+                .map(str -> tagRepository.findByName(str))
+                .map(tag -> new Question_Tag(question, tag))
+                .collect(Collectors.toList());
+        QuestionDto.Post post = new QuestionDto.Post(
+                postA.getMemberId(), postA.getTitle(), postA.getContents(), tags);
 
-       return new ResponseEntity<>(mapper.questionToQuestionResponse(writed), HttpStatus.CREATED);
+        Question writed = questionService.write_Service(mapper.questionPostToQuestion(post));
+
+        return new ResponseEntity<>(mapper.questionToQuestionResponse(writed), HttpStatus.CREATED);
     }
 
     @GetMapping("/{question_id}")
@@ -41,7 +59,7 @@ public class QuestionController {
         List<Question> finded_list = page_list.getContent();
 
         return new ResponseEntity<>(new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(finded_list), page_list)
-        , HttpStatus.OK);
+                , HttpStatus.OK);
     }
 
     @PatchMapping

@@ -10,19 +10,16 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class QuestionService {
     private final QuestionRepository questionRepository;
 
+    @Transactional
     public Question write_Service(Question question) {
         return questionRepository.save(question);
     }
-
-
 
     @Transactional(readOnly = true)
     public Question read_Service(Long question_id) {
@@ -39,9 +36,9 @@ public class QuestionService {
 
     public void modify_Service(Question question) {
         // 수정 요청한 유저가 작성자 본인인지 확인한다.
-        Question finded = read_Service(question.getQuestion_id());
+        Question finded = read_Service(question.getQuestionId());
 
-        if(question.getMember().getMember_id() != finded.getMember().getMember_id()) {
+        if(question.getMember().getMemberId() != finded.getMember().getMemberId()) {
             throw new IllegalArgumentException("작성자 본인이 아닙니다.");
         }
         // 본인이 맞으면 글을 수정한다.
@@ -51,10 +48,10 @@ public class QuestionService {
 
     public void delete_Service(Question question) {
         // 해당 게시글이 존재하는지 확인한다.
-        Question finded = questionRepository.findById(question.getQuestion_id()).orElseThrow(
+        Question finded = questionRepository.findById(question.getQuestionId()).orElseThrow(
                 () -> new IllegalArgumentException("해당 질문 글을 찾을 수 없습니다."));
         // 삭제 요청한 유저가 작성자 본인인지 확인한다.
-        if(question.getMember().getMember_id() != finded.getMember().getMember_id()) {
+        if(question.getMember().getMemberId() != finded.getMember().getMemberId()) {
             throw new IllegalArgumentException("작성자 본인이 아닙니다.");
         }
         // 본인이 맞으면 글을 삭제한다.

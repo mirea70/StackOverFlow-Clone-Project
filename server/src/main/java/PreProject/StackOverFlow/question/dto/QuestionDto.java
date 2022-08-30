@@ -1,11 +1,10 @@
 package PreProject.StackOverFlow.question.dto;
 
 import PreProject.StackOverFlow.member.entity.Member;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import PreProject.StackOverFlow.question.entity.Question_Tag;
+import lombok.*;
 
+import java.util.List;
 
 
 @Getter
@@ -16,7 +15,7 @@ public class QuestionDto {
     @AllArgsConstructor
     @Getter
     public static class Response {
-        private Long question_id;
+        private Long questionId;
 
         private String title;
 
@@ -31,14 +30,29 @@ public class QuestionDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
-    public static class Post {
-        private Long question_id;
-
-        private Member member;
+    public static class PostA {
+        private Long memberId;
 
         private String title;
 
         private String contents;
+
+        private String questionTagNames;
+    }
+
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class Post {
+        private Long memberId;
+
+        private String title;
+
+        private String contents;
+
+        private List<Question_Tag> question_tags;
     }
 
     @Builder
@@ -46,7 +60,7 @@ public class QuestionDto {
     @AllArgsConstructor
     @Getter
     public static class Patch {
-        private Long question_id;
+        private Long questionId;
 
         private Member member;
 

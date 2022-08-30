@@ -3,11 +3,15 @@ package PreProject.StackOverFlow.question.entity;
 import PreProject.StackOverFlow.answer.entity.Answer;
 import PreProject.StackOverFlow.tag.entity.Tag;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
+@NoArgsConstructor
 public class Question_Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,4 +28,23 @@ public class Question_Tag {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "TAG_ID")
     private Tag tag;
+
+    public Question_Tag(Question question, Tag tag){
+        this.question = question;
+        this.tag = tag;
+    }
+
+    public void addQuestion(Question question) {
+        this.question = question;
+        if (!this.question.getQuestion_tags().contains(this)) {
+            this.question.getQuestion_tags().add(this);
+        }
+    }
+
+    public void addTag(Tag tag) {
+        this.tag = tag;
+        if (!this.tag.getQuestion_tags().contains(this)) {
+            this.tag.getQuestion_tags().add(this);
+        }
+    }
 }
