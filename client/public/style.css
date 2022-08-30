@@ -317,10 +317,10 @@ nav {
 /* main css 시작 */
 main {
   background-color: #ffffff;
-  border: solid black 2px;
   display: flex;
   justify-content: center;
   align-items: stretch;
+  min-width: 900px;
 }
 
 #main_left_container {

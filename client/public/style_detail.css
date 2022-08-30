@@ -1,8 +1,8 @@
 #qd_container {
-  border: solid rgb(5, 154, 74) 2px;
   max-width: 1100px;
   width: calc(100% - 164px);
   padding: 24px 16px;
+  min-width: 660px;
 }
 
 .qd_upper_main_wrapper {
@@ -43,7 +43,7 @@
 #qd_lower_left_container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 300px);
   align-items: stretch;
 }
 
@@ -56,6 +56,10 @@
 
 .qd_lower_question_container {
   display: flex;
+}
+
+.qd_lower_content_detail {
+  word-wrap: break-word;
 }
 
 .qd_lower_tags {
@@ -81,13 +85,21 @@
   align-items: stretch;
 }
 
-.qd_lower_info_control {
+.qd_lower_info_control,
+.qd_lower_info_modified {
   display: flex;
   justify-content: flex-start;
   padding-top: 2px;
 }
 
-.qd_lower_info_control > a {
+.qd_lower_info_control,
+.qd_lower_info_modified {
+  margin: 4px;
+  font-size: 12px;
+}
+
+.qd_lower_info_control > a,
+.qd_lower_info_modified > a {
   margin: 4px;
   font-size: 12px;
 }
@@ -103,7 +115,7 @@
   display: flex;
   justify-content: flex-start;
 }
-.qd_lower_answer_header_main_title {
+.qd_lower_title {
   font-size: 19px;
 }
 
@@ -113,7 +125,8 @@
   border-bottom: 1px solid #e8eaec;
 }
 .qd_lower_content_wrapper {
-  width: 100%;
+  width: calc(100% - 50px);
+  min-width: 300px;
 }
 
 #qd_lower_right_container {
@@ -125,6 +138,35 @@
   /* <- 임의값 */
   margin: 0px 0px 15px 24px;
   border: 1px solid black;
+}
+
+#qd_lower_input_container {
+  display: flex;
+  flex-direction: column;
+}
+.qd_lower_input_header_title {
+  padding-top: 20px;
+  margin-bottom: 19px;
+  font-size: 19px;
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputBox > button {
+  width: 140px;
+  padding: 10.4px;
+  font-size: 13px;
+  margin: 10px 0px 12px 0px;
+  background-color: #0995fe;
+  color: white;
+  border: #0995fe;
+  border-radius: 0.5em;
+}
+.ck-editor__editable {
+  height: 100%;
 }
 
 /* lower div 끝 */

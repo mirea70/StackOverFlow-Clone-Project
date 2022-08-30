@@ -1,6 +1,10 @@
 //boardMain에서 질문 타이틀 클릭시 로컬스토리지에 저장된 "key"의 value로 question_id 할당
 const question_id = localStorage.getItem("key");
 
+const qd_lower_left_container = document.getElementById(
+  "qd_lower_left_container"
+);
+
 //question_id로 question과 answer정보를 받아와 localstorage에 저장.
 const getData = async (id) => {
   await fetch(`http://localhost:3001/question/?question_id=${id}`)
@@ -162,7 +166,7 @@ if (answer_data.length > 0) {
   qd_lower_answer_header_main.className = "qd_lower_answer_header_main";
   const qd_lower_answer_header_main_title = document.createElement("h2");
   qd_lower_answer_header_main_title.className =
-    "qd_lower_answer_header_main_title";
+    "qd_lower_title qd_lower_answer_header_main_title";
   qd_lower_answer_header_main_title.innerText = `${answer_data.length} Answers`;
   qd_lower_answer_header_main.appendChild(qd_lower_answer_header_main_title);
   qd_lower_answer_header.appendChild(qd_lower_answer_header_main);
@@ -179,3 +183,11 @@ if (answer_data.length > 0) {
   }
   qd_lower_left_container.appendChild(qd_lower_answer_container);
 }
+
+//input 구현
+const qd_lower_input_container = document.getElementById(
+  "qd_lower_input_container"
+);
+qd_lower_left_container.appendChild(qd_lower_input_container);
+
+// const input_data = CKEDITOR.instances.editor1.getData();

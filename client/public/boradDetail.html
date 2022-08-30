@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="style_detail.css">
   <title>React App</title>
+  <script src="//cdn.ckeditor.com/4.19.1/full/ckeditor.js"></script>
 </head>
 
 <body>
@@ -103,7 +104,21 @@
         </div>
       </div>
       <div id="qd_lower_container">
-        <div id="qd_lower_left_container"></div>
+        <div id="qd_lower_left_container">
+          <div id="qd_lower_input_container">
+            <div class="qd_lower_input_header">
+              <h2 class="qd_lower_input_header_title">Your Answers</h2>
+            </div>
+            <form class="inputBox">
+              <textarea name="editor1" id="editor1" rows="10" cols="80"
+                placeholder="내용을 작성해주세요.">            </textarea>
+              <script>
+                CKEDITOR.replace('editor1');
+              </script>
+              <button>Post Your Answer</button>
+            </form>
+          </div>
+        </div>
         <div id="qd_lower_right_container">right side</div>
       </div>
     </section>
