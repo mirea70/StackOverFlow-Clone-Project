@@ -2,6 +2,7 @@ package PreProject.StackOverFlow.member.service;
 
 import PreProject.StackOverFlow.exception.BusinessLogicException;
 import PreProject.StackOverFlow.exception.ExceptionCode;
+import PreProject.StackOverFlow.member.dto.MemberDto;
 import PreProject.StackOverFlow.member.entity.Member;
 import PreProject.StackOverFlow.member.mapper.MemberMapper;
 import PreProject.StackOverFlow.member.repository.MemberRepository;
@@ -21,22 +22,37 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    public Member login_Service(Member member) {
+    // 혹시 몰라서 남겨둠
+//    public Member login_Service(Member member) {
+//
+//        Member checked = memberRepository.findByEmail(member.getEmail()).orElseThrow(
+//                () -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND)
+//        );
+//        if(!member.getPassword().equals(checked.getPassword())) {
+//            throw new BusinessLogicException("비밀번호가 일치하지 않습니다.");
+//        }
+//
+//        return checked;
+//    }
 
-        Member checked = memberRepository.findByEmail(member.getEmail()).orElseThrow(
-                () -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND)
-        );
-        if(!member.getPassword().equals(checked.getPassword())) {
+    // login logic 변경
+    public Member loginService(MemberDto.Login login){
+        Optional<Member> optionalMember = memberRepository.findByEmail(login.getEmail());
+
+        Member member = optionalMember.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        if(!member.getPassword().equals(login.getPassword())){
             throw new BusinessLogicException("비밀번호가 일치하지 않습니다.");
         }
 
-        return checked;
+        return member;
     }
 
     // 기존의 create() 메서드를 변경하였습니다.
     public void join_Service(Member member) {
         verifyExists(member);
-        Member savedMember = memberRepository.save(member);
+        memberRepository.save(member);
     }
 
     public Member updateMember(Member member) {
