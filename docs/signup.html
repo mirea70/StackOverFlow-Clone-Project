@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+		<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg bg-light">
+		<div class="container nav_box">
+			<ul class="navbar-nav hideicon">
+				<li class="nav-item dropdown">
+					<a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<img src="image/icons8-menu-50.png" width="25px">
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#">Action</a></li>
+						<li><a class="dropdown-item" href="#">Another action</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="#">Something else here</a></li>
+					</ul>
+				</li>
+			</ul>
+			<a class="navbar-brand" href="index.html"><img src="image/logo.png" width="100%"></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav">
+					<li class="nav-item hidenav">
+						<a class="nav-link" href="#">about</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">product</a>
+					</li>
+					<li class="nav-item navking hidenav">
+						<a class="nav-link" href="#">For teams</a>
+					</li>
+				</ul>
+			</div>
+			<input class="form-control me-2 widthS" type="search" placeholder="Search" aria-label="Search">
+			<a href="login.html" class="btn" id="loginButton" type="submit">Log in</a>
+			<a href="signup.html" class="btn" id="sighupButton" type="submit">Sigh up</a>
+      <img class ="membericon hide" src="image/logo.png">
+      <div class ="name hide">nav-item</div>
+		</div>
+	</nav>
+  <section class="login_container">
+		<div class="login_main_container signupimpo">
+      <img src="image/signup.png" width="422px">
+    </div>
+    <div class="login_main_container">
+      <div class="login_logo_container">
+        <i class="fa-brands fa-stack-overflow "></i>
+      </div>
+      <div class="login_social_container">
+        <button class="Google">Log In With Google</button>
+        <button class="Github">Log In With Github</button>
+        <button class="Facebook">Log In With Facebook</button>
+      </div>
+      <div class="login_basic_container">
+        <form class="login_basic_wrapper">
+          <div class="id_container">
+            <label class="id_label">Display name</label>
+            <div class="id_input_container">
+              <input id="name" type="email">
+            </div>
+          </div>
+					<div class="id_container">
+            <label class="id_label">Email</label>
+            <div class="id_input_container">
+              <input id="email" type="email">
+            </div>
+          </div>
+          <div class="password_container">
+            <div class="password_upper_container">
+              <label class="pw_label">Password</label>
+            </div>
+            <div class="pw_input_container">
+              <input id="password" type="password">
+            </div>
+          </div>
+					<p>Passwords must contain at least eight characters, including at least 1 letter and 1 number.</p>
+					<div class="password_container">
+            <div class="password_upper_container">
+              <label class="pw_label">Profile-image</label>
+            </div>
+            <div class="pw_input_container">
+              <input id="image" type="file">
+            </div>
+          </div>
+					<p>Opt-in to receive occasional product updates, user research invitations, company announcements, and digests.<input id="checkbox" type="checkbox"></p>
+          <div class="login_button_container">
+            <button class="login_button">Sign up</button>
+          </div>
+					<p class="agree">By clicking “Sign up”, you agree to our <a href="#">terms of service,</a> <a href="#">privacy policy</a> and <a href="#">cookie policy</a></p>
+        </form>
+      </div>
+      <div class="login_info_container">
+        <p>Already have an account? <a href="login.html">Log in</a></p>
+      </div>
+    </div>
+  </section>
+ 
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>	
+  <script src="login.js"></script>
+</body>
+</html>

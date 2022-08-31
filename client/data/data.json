@@ -101,6 +101,10 @@
       "email": "user3@test.com",
       "password": "user3pwd",
       "profile_image": ""
+    },
+    {
+      "member_id": 5,
+      "login_check": "different"
     }
   ]
 }
