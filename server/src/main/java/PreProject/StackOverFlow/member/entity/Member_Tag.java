@@ -14,13 +14,14 @@ public class Member_Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long member_tag_id;
+    @Column(unique = true, name = "member_tag_id")
+    private Long memberTagId;
 
-    @Column(nullable = false)
-    private Long member_id;
+    @Column(nullable = false, name = "member_id")
+    private Long memberId;
 
-    @Column(nullable = false)
-    private Long tag_id;
+    @Column(nullable = false, name = "tagId")
+    private Long tagId;
 
     // 용도 질문하기
     @Column(nullable = false)

@@ -3,6 +3,8 @@ package PreProject.StackOverFlow.answer.controller;
 import PreProject.StackOverFlow.answer.dto.AnswerDto;
 import PreProject.StackOverFlow.answer.mapper.AnswerMapper;
 import PreProject.StackOverFlow.answer.service.AnswerService;
+import PreProject.StackOverFlow.member.service.MemberService;
+import PreProject.StackOverFlow.question.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +17,18 @@ public class AnswerController {
     private final AnswerService answerService;
 
     private final AnswerMapper answerMapper;
+    private final MemberService memberService;
+    private final QuestionService questionService;
 
     @PostMapping
-    public ResponseEntity answer_write(@RequestBody AnswerDto.Post post) {
+    public ResponseEntity answer_write(@RequestBody AnswerDto.PostA postA) {
+        AnswerDto.Post post = new AnswerDto.Post(
+                postA.getTitle(), postA.getContents(),
+                questionService.read_Service(postA.getQuestionId()),
+                memberService.findMember(postA.getMemberId()));
+
         answerService.answer_write_Service(answerMapper.answerPostToAnswer(post));
+        
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

@@ -22,14 +22,14 @@ public class AnswerService {
 
     public void delete_Service(Answer answer) {
         // 해당 게시글이 존재하는지 확인한다.
-        Question finded_Question = questionRepository.findById(answer.getQuestion().getQuestion_id()).orElseThrow(
+        Question finded_Question = questionRepository.findById(answer.getQuestion().getQuestionId()).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글을 찾을 수 없습니다."));
         // 삭제할 답글이 존재하는지 확인한다.
         Answer finded_Answer = answerRepository.findById(answer.getAsnwer_id()).orElseThrow(
                 () -> new IllegalArgumentException("해당 답글을 찾을 수 없습니다."));
 
         // 삭제 요청한 유저가 작성자 본인인지 확인한다.
-        if(answer.getMember().getMember_id() != finded_Answer.getMember().getMember_id()) {
+        if(answer.getMember().getMemberId() != finded_Answer.getMember().getMemberId()) {
             throw new IllegalArgumentException("작성자 본인이 아닙니다.");
         }
         // 본인이 맞으면 글을 삭제한다.
