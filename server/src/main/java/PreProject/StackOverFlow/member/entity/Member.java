@@ -48,7 +48,7 @@ public class Member extends BaseTimeEntity {
     @Column
     private String job;
 
-    @Column
+    @Column(length = 500)
     private String about;
 
     // Question : Member 테이블 간의 N:1 연관관계 매핑을 위한 JPA 일대다 설정(양방향)

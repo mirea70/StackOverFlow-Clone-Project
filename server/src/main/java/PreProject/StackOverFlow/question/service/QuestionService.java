@@ -1,8 +1,10 @@
 package PreProject.StackOverFlow.question.service;
 
 
+import PreProject.StackOverFlow.member.repository.MemberRepository;
 import PreProject.StackOverFlow.question.entity.Question;
 import PreProject.StackOverFlow.question.repository.QuestionRepository;
+import PreProject.StackOverFlow.tag.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,9 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class QuestionService {
     private final QuestionRepository questionRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional
-    public Question write_Service(Question question) {
+    public Question write_Service(Question question, Long memberId) {
+        question.addMember(memberRepository.findById(memberId).orElseThrow(
+                () -> new IllegalArgumentException("로그인을 해주세요")
+        ));
         return questionRepository.save(question);
     }
 
@@ -29,8 +35,8 @@ public class QuestionService {
         return finded;
     }
 
-    public Page<Question> get_list_Service(int page) {
-        return questionRepository.findAll(PageRequest.of(page - 1, 10,
+    public Page<Question> get_list_Service(int page, int size) {
+        return questionRepository.findAll(PageRequest.of(page - 1, size,
                 Sort.by("questionId").descending()));
     }
 

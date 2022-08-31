@@ -18,8 +18,8 @@ import javax.persistence.*;
 public class Answer extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
-    private Long asnwer_id;
+    @Column(unique = true, name = "asnwer_id")
+    private Long asnwerId;
 
     @Column(nullable = false)
     private String  title;
@@ -31,7 +31,7 @@ public class Answer extends BaseTimeEntity {
     private int vote;
 
     // Answer : Question 테이블 간의 N:1 연관관계 매핑을 위한 JPA 다대일 설정
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
 
@@ -39,4 +39,12 @@ public class Answer extends BaseTimeEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+    public void addQuestion(Question question) {
+        this.question = question;
+    }
+
+    public void addMember(Member member) {
+        this.member = member;
+    }
 }

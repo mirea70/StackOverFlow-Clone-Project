@@ -5,17 +5,25 @@ import PreProject.StackOverFlow.member.dto.MemberDto;
 import PreProject.StackOverFlow.member.entity.Member;
 import PreProject.StackOverFlow.member.mapper.MemberMapper;
 import PreProject.StackOverFlow.member.service.MemberService;
+import PreProject.StackOverFlow.question.dto.QuestionDto;
+import PreProject.StackOverFlow.question.entity.Question;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@ApiResponses({
+        @ApiResponse(code = 200, message = "Success"),
+        @ApiResponse(code = 400, message = "Bad Request"),
+        @ApiResponse(code = 500, message = "Internal Server Error")
+})
 @RestController
 @RequestMapping("/members")
 @RequiredArgsConstructor
@@ -26,12 +34,15 @@ public class MemberController {
 
 
     // login method 변경
+    @ApiOperation(value = "로그인", notes = "로그인한 유저의 정보 반환", response = MemberDto.Response.class)
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody MemberDto.Login login){
+        Member member = memberService.loginService(login);
         try{
-            Member member = memberService.loginService(login);
+            System.out.println(member.getEmail());
             return new ResponseEntity<>(member, HttpStatus.OK);
         }catch (BusinessLogicException e){
+            System.out.println(member.getEmail());
             return new ResponseEntity<>("different", HttpStatus.BAD_REQUEST);
         }
     }
@@ -50,21 +61,30 @@ public class MemberController {
 //        }
 //    }
 
+    @ApiOperation(value = "회원 가입", notes = "요청된 회원 데이터 저장 및 반환", response = String.class)
     @PostMapping("/join")
 //      클라이언트에서 email, name, password, image 전송
     // + @RequestBody Annotation 추가
-    public ResponseEntity join(@Valid @RequestBody MemberDto.Post post) {
+    public ResponseEntity join(@Valid @RequestBody MemberDto.Post memberPost) {
 //      전송 된 email가 있는지 조회, 있다면 'diffferent' 전송 / 없으면 다음 단계 진행
-        System.out.println(post.getName());
-        System.out.println(post.getEmail());
-        System.out.println(post.getPassword());
-        System.out.println(post.getProfile_image());
+        System.out.println(memberPost.getName());
+        System.out.println(memberPost.getEmail());
+        System.out.println(memberPost.getPassword());
+        System.out.println(memberPost.getProfile_image());
         try {
 //          전송된 email, name, password, image를 저장 및 'success' 출력
-            memberService.join_Service(memberMapper.memberPostToMember(post));
+            memberService.join_Service(memberMapper.memberPostToMember(memberPost));
             return new ResponseEntity<>("success", HttpStatus.CREATED);
         } catch (BusinessLogicException e) {
             return new ResponseEntity<>("different", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @ApiOperation(value = "회원 조회", notes = "1개 회원 데이터 반환", response = MemberDto.Response.class)
+    @ApiImplicitParam(name = "memberId", value = "회원 식별번호")
+    @GetMapping("/{memberId}")
+    public ResponseEntity find(@PathVariable Long memberId) {
+        Member findMember = memberService.find_Member(memberId);
+        return new ResponseEntity<>(memberMapper.memberToMemberResponse(findMember), HttpStatus.OK);
     }
 }

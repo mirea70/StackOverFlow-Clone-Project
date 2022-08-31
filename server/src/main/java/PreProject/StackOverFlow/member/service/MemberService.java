@@ -56,7 +56,7 @@ public class MemberService {
     }
 
     public Member updateMember(Member member) {
-        Member findMember = findVerifiedMember(member.getMemberId());
+        Member findMember = find_Member(member.getMemberId());
 
         Optional.ofNullable(member.getName())
                 .ifPresent(name -> findMember.setName(name));
@@ -72,11 +72,7 @@ public class MemberService {
         return memberRepository.save(findMember);
     }
 
-    public Member findMember(long member_id) {
-        return findVerifiedMember(member_id);
-    }
-
-    public Member findVerifiedMember(long member_id) {
+    public Member find_Member(long member_id) {
         Optional<Member> optionalMember = memberRepository.findById(member_id);
 
         Member member = optionalMember.orElseThrow(() ->
