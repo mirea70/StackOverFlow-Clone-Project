@@ -37,6 +37,8 @@ public class Question extends BaseTimeEntity {
     @Builder.Default
     private int view = 0;
 
+    private String questionTagNames;
+
     @ManyToOne()
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
@@ -45,8 +47,8 @@ public class Question extends BaseTimeEntity {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Question_Tag> question_tags = new ArrayList<>();
 
-    // Answer : Question 테이블 간의 N:N 연관관계 매핑을 위한 JPA 일대다 설정
-    @OneToMany(mappedBy = "question")
+    // Answer : Question 테이블 간의 N:1 연관관계 매핑을 위한 JPA 일대다 설정
+    @OneToMany(mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Answer> answers = new ArrayList<>();
 
     public void setQuestion_tags(List<Question_Tag> tags){
@@ -58,7 +60,15 @@ public class Question extends BaseTimeEntity {
         this.contents = contents;
     }
 
+    public void addMember(Member member){
+        this.member = member;
+    }
+
     public void update_view_cnt() {
         view += 1;
+    }
+
+    public void add_Answer(Answer answer) {
+        this.answers.add(answer);
     }
 }

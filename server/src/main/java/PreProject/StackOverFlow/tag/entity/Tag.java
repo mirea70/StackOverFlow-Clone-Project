@@ -29,10 +29,4 @@ public class Tag extends BaseTimeEntity {
     @OneToMany(mappedBy = "tag")
     private List<Question_Tag> question_tags = new ArrayList<>();
 
-    // BaseTimeEntity로 대체 -> 날짜 자동 저장 설정
-//    @Column(nullable = false)
-//    private LocalDateTime created_at;
-//
-//    @Column(nullable = false)
-//    private LocalDateTime modified_at;
 }
