@@ -26,8 +26,6 @@ public class QuestionController {
     private final QuestionMapper mapper;
     private final TagRepository tagRepository;
 
-    private final MemberService memberService;
-
     // 질문 등록
     @PostMapping("/write")
     public ResponseEntity write(@RequestBody QuestionDto.PostA postA) {

@@ -32,6 +32,21 @@ public class AnswerDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
+    public static class PostA {
+
+        private String title;
+
+        private String contents;
+
+        private long questionId;
+
+        private long memberId;
+    }
+
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
     public static class Post {
 
         private String title;

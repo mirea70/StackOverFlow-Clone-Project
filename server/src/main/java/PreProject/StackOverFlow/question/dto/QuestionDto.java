@@ -1,5 +1,6 @@
 package PreProject.StackOverFlow.question.dto;
 
+import PreProject.StackOverFlow.answer.entity.Answer;
 import PreProject.StackOverFlow.member.entity.Member;
 import PreProject.StackOverFlow.question.entity.Question_Tag;
 import lombok.*;
@@ -24,6 +25,8 @@ public class QuestionDto {
         private int vote;
 
         private int view;
+
+        private List<Answer> answers;
     }
 
     @Builder
