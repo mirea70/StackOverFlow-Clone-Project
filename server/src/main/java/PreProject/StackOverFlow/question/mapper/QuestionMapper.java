@@ -3,6 +3,8 @@ package PreProject.StackOverFlow.question.mapper;
 
 import PreProject.StackOverFlow.answer.dto.AnswerDto;
 import PreProject.StackOverFlow.answer.entity.Answer;
+import PreProject.StackOverFlow.comment.dto.CommentDto;
+import PreProject.StackOverFlow.comment.entity.Comment;
 import PreProject.StackOverFlow.member.entity.Member;
 import PreProject.StackOverFlow.question.dto.QuestionDto;
 import PreProject.StackOverFlow.question.entity.Question;
@@ -68,6 +70,7 @@ public interface QuestionMapper {
             response.view(question.getView());
             response.questionTagNames(question.getQuestionTagNames());
             response.answers(this.answerListToResponseList(question.getAnswers()));
+            response.checked(question.getChecked());
             return response.build();
         }
     }
@@ -114,6 +117,36 @@ public interface QuestionMapper {
             response.answerId(answer.getAsnwerId());
             response.memberId(answer.getMember().getMemberId());
             response.questionId(answer.getQuestion().getQuestionId());
+            response.comments(this.commentListToResponseList(answer.getComments()));
+            return response.build();
+        }
+    }
+
+    default public List<CommentDto.Response> commentListToResponseList(List<Comment> list) {
+        if (list == null) {
+            return null;
+        } else {
+            List<CommentDto.Response> list1 = new ArrayList(list.size());
+            Iterator var3 = list.iterator();
+
+            while(var3.hasNext()) {
+                Comment comment = (Comment) var3.next();
+                list1.add(this.commentToResponseDto(comment));
+            }
+
+            return list1;
+        }
+    }
+
+    default public CommentDto.Response commentToResponseDto(Comment comment) {
+        if (comment == null) {
+            return null;
+        } else {
+            CommentDto.Response.ResponseBuilder response = CommentDto.Response.builder();
+            response.commentId(comment.getCommentId());
+            response.answerId(comment.getAnswer().getAsnwerId());
+            response.memberId(comment.getMember().getMemberId());
+            response.contents(comment.getContents());
             return response.build();
         }
     }

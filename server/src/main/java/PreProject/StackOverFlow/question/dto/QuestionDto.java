@@ -32,7 +32,8 @@ public class QuestionDto {
         private String questionTagNames;
         @ApiModelProperty(value = "질문에 달린 답글들", example = "배열 값으로 전달됩니다.")
         private List<AnswerDto.Response> answers;
-
+        @ApiModelProperty(value = "채택 여부 값", example = "1")
+        private int checked;
     }
 
 //    @Builder
