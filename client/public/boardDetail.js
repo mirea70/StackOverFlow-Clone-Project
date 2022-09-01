@@ -1,10 +1,9 @@
 //boardMain에서 질문 타이틀 클릭시 로컬스토리지에 저장된 "key"의 value로 question_id 할당
-localStorage.setItem("key", 1);
 const question_id = localStorage.getItem("key");
 const url = "http://ec2-15-165-63-80.ap-northeast-2.compute.amazonaws.com:8080";
 
 const getData = async (url, id) => {
-  await fetch(`${url}/question/${id}`)
+  await fetch(`${url}/questions/${id}`)
     .then((res) => {
       if (!res.ok) {
         throw Error("could not fetch the data for that resource");
@@ -13,7 +12,7 @@ const getData = async (url, id) => {
     })
     .then((data) => {
       const question_data = data;
-      const answer_data = question_data.data;
+      const answer_data = question_data.answers;
       let today = new Date();
       const getDateDiff = (d1, d2) => {
         const date1 = new Date(d1);
@@ -47,17 +46,16 @@ const getData = async (url, id) => {
         qd_lower_content_wrapper.appendChild(qd_lower_content);
 
         if (target === "question") {
-          //태그내용 일시 없앰
-          // const qd_lower_tags = document.createElement("div");
-          // qd_lower_tags.className = "qd_lower_tags";
-          // const tags = data.tags.split(" ");
-          // for (let tag of tags) {
-          //   let qd_lower_tags_detail = document.createElement("a");
-          //   qd_lower_tags_detail.className = "qd_lower_tags_detail";
-          //   qd_lower_tags_detail.innerText = tag;
-          //   qd_lower_tags.appendChild(qd_lower_tags_detail);
-          // }
-          // qd_lower_content_wrapper.appendChild(qd_lower_tags);
+          const qd_lower_tags = document.createElement("div");
+          qd_lower_tags.className = "qd_lower_tags";
+          const tags = data.questionTagNames.split(" ");
+          for (let tag of tags) {
+            let qd_lower_tags_detail = document.createElement("a");
+            qd_lower_tags_detail.className = "qd_lower_tags_detail";
+            qd_lower_tags_detail.innerText = tag;
+            qd_lower_tags.appendChild(qd_lower_tags_detail);
+          }
+          qd_lower_content_wrapper.appendChild(qd_lower_tags);
         }
 
         //   if (target === "answer") {
@@ -76,21 +74,30 @@ const getData = async (url, id) => {
           qd_lower_info_control_button.innerText = button;
           qd_lower_info_control.appendChild(qd_lower_info_control_button);
         }
-        const qd_lower_info_modified = document.createElement("div");
-        qd_lower_info_modified.className = "qd_lower_info_modified";
-        const qd_lower_info_modified_detail = document.createElement("a");
-        qd_lower_info_modified_detail.className =
-          "qd_lower_info_modified_detail";
-        qd_lower_info_modified_detail.innerText = data.modified_at;
-        qd_lower_info_modified.appendChild(qd_lower_info_modified_detail);
+        // const qd_lower_info_modified = document.createElement("div");
+        // qd_lower_info_modified.className = "qd_lower_info_modified";
+        // const qd_lower_info_modified_detail = document.createElement("a");
+        // qd_lower_info_modified_detail.className =
+        //   "qd_lower_info_modified_detail";
+        // qd_lower_info_modified_detail.innerText = data.modified_at;
+        // qd_lower_info_modified.appendChild(qd_lower_info_modified_detail);
         const qd_lower_info_users = document.createElement("div");
         qd_lower_info_users.className = "qd_lower_info_users";
-        qd_lower_info_users.innerText = data.writer;
-        qd_lower_info.append(
-          qd_lower_info_control,
-          qd_lower_info_modified,
-          qd_lower_info_users
+        const qd_lower_info_users_time = document.createElement("div");
+        const qd_lower_info_users_details = document.createElement("div");
+        const qd_lower_info_users_details_img = document.createElement("img");
+        // qd_lower_info_users_details_img.src = data[profile_image];
+        const qd_lower_info_users_details_name = document.createElement("a");
+        qd_lower_info_users_details_name.innerText = data.name;
+        qd_lower_info_users_details.append(
+          qd_lower_info_users_details_img,
+          qd_lower_info_users_details_name
         );
+        qd_lower_info_users.append(
+          qd_lower_info_users_time,
+          qd_lower_info_users_details
+        );
+        qd_lower_info.append(qd_lower_info_control, qd_lower_info_users);
         qd_lower_content_wrapper.appendChild(qd_lower_info);
         parent.appendChild(qd_lower_content_wrapper);
       };
@@ -135,37 +142,36 @@ const getData = async (url, id) => {
       makeVoteBar("question", question_data, qd_lower_question_container);
       makeContent("question", question_data, qd_lower_question_container);
       qd_lower_left_container.appendChild(qd_lower_question_container);
-
       //answer 컨테이너 렌더링
-      // if (answer_data.length > 0) {
-      //   const qd_lower_answer_container = document.createElement("div");
-      //   qd_lower_answer_container.className = "qd_lower_answer_container";
+      if (answer_data.length > 0) {
+        const qd_lower_answer_container = document.createElement("div");
+        qd_lower_answer_container.className = "qd_lower_answer_container";
 
-      //   const qd_lower_answer_header = document.createElement("div");
-      //   qd_lower_answer_header.className = "qd_lower_answer_header";
-      //   const qd_lower_answer_header_main = document.createElement("div");
-      //   qd_lower_answer_header_main.className = "qd_lower_answer_header_main";
-      //   const qd_lower_answer_header_main_title = document.createElement("h2");
-      //   qd_lower_answer_header_main_title.className =
-      //     "qd_lower_title qd_lower_answer_header_main_title";
-      //   qd_lower_answer_header_main_title.innerText = `${answer_data.length} Answers`;
-      //   qd_lower_answer_header_main.appendChild(
-      //     qd_lower_answer_header_main_title
-      //   );
-      //   qd_lower_answer_header.appendChild(qd_lower_answer_header_main);
-      //   qd_lower_answer_container.appendChild(qd_lower_answer_header);
-      //   //   const qd_lower_answer_header_filter = document.createElement("div");
-      //   //   qd_lower_answer_header_filter.className = "qd_lower_answer_header_filter";
+        const qd_lower_answer_header = document.createElement("div");
+        qd_lower_answer_header.className = "qd_lower_answer_header";
+        const qd_lower_answer_header_main = document.createElement("div");
+        qd_lower_answer_header_main.className = "qd_lower_answer_header_main";
+        const qd_lower_answer_header_main_title = document.createElement("h2");
+        qd_lower_answer_header_main_title.className =
+          "qd_lower_title qd_lower_answer_header_main_title";
+        qd_lower_answer_header_main_title.innerText = `${answer_data.length} Answers`;
+        qd_lower_answer_header_main.appendChild(
+          qd_lower_answer_header_main_title
+        );
+        qd_lower_answer_header.appendChild(qd_lower_answer_header_main);
+        qd_lower_answer_container.appendChild(qd_lower_answer_header);
+        //   const qd_lower_answer_header_filter = document.createElement("div");
+        //   qd_lower_answer_header_filter.className = "qd_lower_answer_header_filter";
 
-      //   for (let answer of answer_data) {
-      //     const qd_lower_answer_wrapper = document.createElement("div");
-      //     qd_lower_answer_wrapper.className = "qd_lower_answer_wrapper";
-      //     makeVoteBar("answer", answer, qd_lower_answer_wrapper);
-      //     makeContent("answer", answer, qd_lower_answer_wrapper);
-      //     qd_lower_answer_container.appendChild(qd_lower_answer_wrapper);
-      //   }
-      //   qd_lower_left_container.appendChild(qd_lower_answer_container);
-      // }
+        for (let answer of answer_data) {
+          const qd_lower_answer_wrapper = document.createElement("div");
+          qd_lower_answer_wrapper.className = "qd_lower_answer_wrapper";
+          makeVoteBar("answer", answer, qd_lower_answer_wrapper);
+          makeContent("answer", answer, qd_lower_answer_wrapper);
+          qd_lower_answer_container.appendChild(qd_lower_answer_wrapper);
+        }
+        qd_lower_left_container.appendChild(qd_lower_answer_container);
+      }
       return data;
     })
     .then((x) => {
@@ -175,22 +181,42 @@ const getData = async (url, id) => {
       const qd_lower_input_container = document.getElementById(
         "qd_lower_input_container"
       );
-      console.log(qd_lower_input_container);
       qd_lower_left_container.appendChild(qd_lower_input_container);
     });
 };
 getData(url, question_id);
 
-const setAnswer = () => {
+const setAnswer = async () => {
   const input_data = CKEDITOR.instances.editor1.getData();
-  alert("답변을 등록합니다.");
   // question_id(선언할당되어있음), data 인풋내용, 사용자정보 바디를 포함해서 answer로 post요청
-  const date = new Date().toJSON();
-  const body = {
+  const answer_body = {
     contents: input_data,
-    member_id: localStorage.getItem("id"),
-    questionId: question_id,
-    vote: 0,
-    created_at: date,
+    memberId: localStorage.getItem("memberId"),
+    questionId: localStorage.getItem("key"),
+    title: "답글 제목입니다",
   };
+  await fetch(
+    "http://ec2-15-165-63-80.ap-northeast-2.compute.amazonaws.com:8080/answers/write",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(answer_body),
+    }
+  )
+    .then((res) => {
+      if (res.status === 200 || res.status === 201) {
+        return "답변 등록이 완료되었습니다.";
+      } else {
+        return "답변 등록 실패";
+      }
+    })
+    .then((message) => {
+      alert(message);
+    });
+};
+
+const moveAsk = () => {
+  location.href = "ask.html";
 };
