@@ -32,6 +32,14 @@ public class AnswerController {
         return new ResponseEntity<>(answerMapper.answerToResponseDto(writed) ,HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "답변 수정", notes = "답변 데이터 수정", response = String.class)
+    @PatchMapping("/modify")
+    public ResponseEntity answer_modify(@RequestBody AnswerDto.Patch answerPatch) {
+        answerService.answer_modify_Service(answerMapper.answerPatchToAnswer(answerPatch));
+
+        return new ResponseEntity<>("수정이 완료되었습니다.", HttpStatus.OK);
+    }
+
     @ApiOperation(value = "답글 삭제", notes = "1개 답글 삭제")
     @ApiImplicitParam(name = "answerId", value = "답글 식별번호", required = true)
     @DeleteMapping("/{answerId}")
@@ -48,5 +56,25 @@ public class AnswerController {
     public ResponseEntity find_answer(@PathVariable Long answerId) {
         Answer finded = answerService.find_Answer(answerId);
         return new ResponseEntity<>(answerMapper.answerToResponseDto(finded), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = " + 투표", response = String.class)
+    @ApiImplicitParam(name = "answerId", value = "답 식별번호", required = true)
+    @PatchMapping("/upVote/{answerId}")
+    public ResponseEntity answerUpVote(@PathVariable Long answerId,
+                                 @ApiParam(value="회원 식별번호", required=true, example="1")
+                                 @RequestParam("memberId") Long memberId) {
+        answerService.answer_UpVote_Service(answerId, memberId);
+        return new ResponseEntity<>(" + 투표가 완료되었습니다", HttpStatus.OK);
+    }
+
+    @ApiOperation(value = " - 투표", response = String.class)
+    @ApiImplicitParam(name = "answerId", value = "답변 식별번호", required = true)
+    @PatchMapping("/downVote/{answerId}")
+    public ResponseEntity answerDownVote(@PathVariable Long answerId,
+                                   @ApiParam(value="회원 식별번호", required=true, example="1")
+                                   @RequestParam("memberId") Long memberId) {
+        answerService.answer_DownVote_Service(answerId, memberId);
+        return new ResponseEntity<>(" - 투표가 완료되었습니다", HttpStatus.OK);
     }
 }

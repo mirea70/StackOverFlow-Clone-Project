@@ -80,7 +80,7 @@ public class QuestionController {
     }
 
     @ApiOperation(value = "질문 수정", notes = "질문 데이터 수정", response = String.class)
-    @PatchMapping
+    @PatchMapping("/modify")
     public ResponseEntity modify(@RequestBody QuestionDto.Patch questionPatch) {
 
         questionService.modify_Service(mapper.questionPatchToQuestion(questionPatch));
@@ -94,5 +94,45 @@ public class QuestionController {
     public ResponseEntity delete(@PathVariable Long questionId) {
         questionService.delete_Service(questionId);
         return new ResponseEntity<>("삭제가 완료되었습니다.", HttpStatus.NO_CONTENT);
+    }
+
+    @ApiOperation(value = "질문 채택", response = String.class)
+    @ApiImplicitParam(name = "questionId", value = "질문 식별번호", required = true)
+    @PatchMapping("/check/{questionId}")
+    public ResponseEntity check(@PathVariable Long questionId,
+                                @ApiParam(value="회원 식별번호", required=true, example="1")
+                                @RequestParam("memberId") Long memberId) {
+        questionService.check_Service(questionId, memberId);
+        return new ResponseEntity<>("채택이 완료되었습니다", HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "질문 채택 취소", response = String.class)
+    @ApiImplicitParam(name = "questionId", value = "질문 식별번호", required = true)
+    @PatchMapping("/uncheck/{questionId}")
+    public ResponseEntity uncheck(@PathVariable Long questionId,
+                                    @ApiParam(value="회원 식별번호", required=true, example="1")
+                                    @RequestParam("memberId") Long memberId) {
+        questionService.uncheck_Service(questionId, memberId);
+        return new ResponseEntity<>("채택 취소가 완료되었습니다", HttpStatus.OK);
+    }
+
+    @ApiOperation(value = " + 투표", response = String.class)
+    @ApiImplicitParam(name = "questionId", value = "질문 식별번호", required = true)
+    @PatchMapping("/upVote/{questionId}")
+    public ResponseEntity upVote(@PathVariable Long questionId,
+                                  @ApiParam(value="회원 식별번호", required=true, example="1")
+                                  @RequestParam("memberId") Long memberId) {
+        questionService.upVote_Service(questionId, memberId);
+        return new ResponseEntity<>(" + 투표가 완료되었습니다", HttpStatus.OK);
+    }
+
+    @ApiOperation(value = " - 투표", response = String.class)
+    @ApiImplicitParam(name = "questionId", value = "질문 식별번호", required = true)
+    @PatchMapping("/downVote/{questionId}")
+    public ResponseEntity downVote(@PathVariable Long questionId,
+                                 @ApiParam(value="회원 식별번호", required=true, example="1")
+                                 @RequestParam("memberId") Long memberId) {
+        questionService.downVote_Service(questionId, memberId);
+        return new ResponseEntity<>(" - 투표가 완료되었습니다", HttpStatus.OK);
     }
 }

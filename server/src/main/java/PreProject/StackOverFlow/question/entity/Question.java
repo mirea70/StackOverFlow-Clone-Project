@@ -3,6 +3,7 @@ package PreProject.StackOverFlow.question.entity;
 import PreProject.StackOverFlow.answer.entity.Answer;
 import PreProject.StackOverFlow.basetime.BaseTimeEntity;
 import PreProject.StackOverFlow.member.entity.Member;
+import PreProject.StackOverFlow.voteMember.entity.VoteMember;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -39,16 +40,21 @@ public class Question extends BaseTimeEntity {
 
     private String questionTagNames;
 
-    @ManyToOne()
+    private int checked = 0;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
+    @OneToMany(mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    private List<VoteMember> voteMemberList = new ArrayList<>();
+
     // Tag : Question 테이블 간의 N:N 연관관계 매핑을 위한 JPA 일대다 설정
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question_Tag> question_tags = new ArrayList<>();
 
     // Answer : Question 테이블 간의 N:1 연관관계 매핑을 위한 JPA 일대다 설정
-    @OneToMany(mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
     private List<Answer> answers = new ArrayList<>();
 
     public void setQuestion_tags(List<Question_Tag> tags){
@@ -70,5 +76,22 @@ public class Question extends BaseTimeEntity {
 
     public void add_Answer(Answer answer) {
         this.answers.add(answer);
+    }
+
+    public void check_Question() {
+        this.checked +=1;
+    }
+
+    public void uncheck_Question() {
+        this.checked -= 1;
+    }
+
+    public void up_vote(VoteMember voteMember) {
+        this.vote +=1;
+        this.voteMemberList.add(voteMember);
+    }
+    public void down_vote(VoteMember voteMember) {
+        this.vote -=1;
+        this.voteMemberList.add(voteMember);
     }
 }

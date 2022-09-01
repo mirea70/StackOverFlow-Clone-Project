@@ -2,11 +2,11 @@ package PreProject.StackOverFlow.member.entity;
 
 import PreProject.StackOverFlow.answer.entity.Answer;
 import PreProject.StackOverFlow.basetime.BaseTimeEntity;
+import PreProject.StackOverFlow.comment.entity.Comment;
 import PreProject.StackOverFlow.question.entity.Question;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,11 +52,13 @@ public class Member extends BaseTimeEntity {
     private String about;
 
     // Question : Member 테이블 간의 N:1 연관관계 매핑을 위한 JPA 일대다 설정(양방향)
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Question> questions = new ArrayList<>();
 
     // Answer : Member 테이블 간의 N:1 연관관계 매핑을 위한 JPA 일대다 설정(양방향)
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Answer> answers = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    private List<Comment> comments = new ArrayList<>();
 }

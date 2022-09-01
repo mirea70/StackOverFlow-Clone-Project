@@ -1,7 +1,6 @@
 package PreProject.StackOverFlow.answer.dto;
 
-import PreProject.StackOverFlow.member.entity.Member;
-import PreProject.StackOverFlow.question.entity.Question;
+import PreProject.StackOverFlow.comment.dto.CommentDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -32,6 +31,8 @@ public class AnswerDto {
         private Long questionId;
         @ApiModelProperty(notes = "답변 등록한 회원 식별번호", example = "2")
         private Long memberId;
+        @ApiModelProperty(value = "답변에 달린 댓글들", example = "배열 값으로 전달됩니다.")
+        private List<CommentDto.Response> comments;
     }
 
     @ApiModel(value = "AnswerPostDto",description = "답변 작성 모델")
