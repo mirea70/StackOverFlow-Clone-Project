@@ -12,6 +12,9 @@ const getData = async (url, id) => {
     })
     .then((data) => {
       const question_data = data;
+      //임시
+      question_data.writer = 1;
+      //---임시
       const answer_data = question_data.answers;
       let today = new Date();
       const getDateDiff = (d1, d2) => {
@@ -22,6 +25,17 @@ const getData = async (url, id) => {
       };
 
       //---- upper 질문 타이틀, 날짜, 뷰 등록 div
+
+      //edit, delete 함수 구현
+      const handleEdit = (data) => {
+        localStorage.setItem("edit_target_data", JSON.stringify(data));
+        location.href = "ask.html";
+      };
+      const handleDelete = (question_id) => {
+        alert("삭제합니다.");
+        //삭제 fetch 요청//
+      };
+      // --- edit, delete 함수 구현
 
       //투표 컨테이터 및 컨테이너 렌더링 위한 함수 구현
       const makeVoteBar = (target, data, parent) => {
@@ -68,10 +82,19 @@ const getData = async (url, id) => {
         qd_lower_info.className = "qd_lower_info";
         const qd_lower_info_control = document.createElement("div");
         qd_lower_info_control.className = "qd_lower_info_control";
-        const button_arr = ["Share", "Edit", "Follow"];
+        let button_arr = ["Share", "Follow"];
+        if (data.writer === JSON.parse(localStorage.getItem("memberId"))) {
+          button_arr = ["Share", "Edit", "Delete", "Follow"];
+        }
         for (let button of button_arr) {
           let qd_lower_info_control_button = document.createElement("a");
           qd_lower_info_control_button.innerText = button;
+          if (button === "Edit") {
+            qd_lower_info_control_button.onclick = () => handleEdit(data);
+          }
+          if (button === "Delete") {
+            qd_lower_info_control_button.onclick = () => handleDelete();
+          }
           qd_lower_info_control.appendChild(qd_lower_info_control_button);
         }
         // const qd_lower_info_modified = document.createElement("div");
