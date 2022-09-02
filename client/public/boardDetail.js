@@ -12,9 +12,6 @@ const getData = async (url, id) => {
     })
     .then((data) => {
       const question_data = data;
-      //임시
-      question_data.writer = 1;
-      //---임시
       const answer_data = question_data.answers;
       let today = new Date();
       const getDateDiff = (d1, d2) => {
@@ -27,14 +24,28 @@ const getData = async (url, id) => {
       //---- upper 질문 타이틀, 날짜, 뷰 등록 div
 
       //edit, delete 함수 구현
-      const handleEdit = (data) => {
-        localStorage.setItem("edit_target_data", JSON.stringify(data));
-        location.href = "ask.html";
+      const handleEdit = (data, target) => {
+        if (target === "question") {
+          localStorage.setItem("edit_target_data", JSON.stringify(data));
+          location.href = "ask.html";
+        }
+        if (target === "answers") {
+          alert("미구현..");
+        }
       };
-      const handleDelete = async (question_id) => {
+      const handleDelete = async (data, target) => {
         alert("삭제합니다.");
+        let target_url = "";
+        let url_id;
+        if (target === "question") {
+          target_url = "questions";
+          url_id = data.questionId;
+        } else {
+          target_url = "answers";
+          url_id = data.answerId + `?memberId=${data.memberId}`;
+        }
         await fetch(
-          `http://ec2-15-165-63-80.ap-northeast-2.compute.amazonaws.com:8080/questions/${question_id}`,
+          `http://ec2-15-165-63-80.ap-northeast-2.compute.amazonaws.com:8080/${target_url}/${url_id}`,
           {
             method: "DELETE",
             headers: {
@@ -43,11 +54,11 @@ const getData = async (url, id) => {
           }
         ).then((res) => {
           if (res.status === 200 || res.status === 204) {
-            alert("질문 삭제 완료");
+            alert(`${target} deleted`);
             localStorage.removeItem("key");
             location.href = "boardMainLogin.html";
           } else {
-            alert("질문 삭제 실패");
+            alert("fail");
           }
         });
         //삭제 fetch 요청//
@@ -100,18 +111,22 @@ const getData = async (url, id) => {
         const qd_lower_info_control = document.createElement("div");
         qd_lower_info_control.className = "qd_lower_info_control";
         let button_arr = ["Share", "Follow"];
-        if (data.writer === JSON.parse(localStorage.getItem("memberId"))) {
+        if (data.memberId === JSON.parse(localStorage.getItem("memberId"))) {
           button_arr = ["Share", "Edit", "Delete", "Follow"];
         }
         for (let button of button_arr) {
-          let qd_lower_info_control_button = document.createElement("a");
+          let qd_lower_info_control_button = document.createElement(
+            "a",
+            target
+          );
           qd_lower_info_control_button.innerText = button;
           if (button === "Edit") {
-            qd_lower_info_control_button.onclick = () => handleEdit(data);
+            qd_lower_info_control_button.onclick = () =>
+              handleEdit(data, target);
           }
           if (button === "Delete") {
             qd_lower_info_control_button.onclick = () =>
-              handleDelete(data.questionId);
+              handleDelete(data, target);
           }
           qd_lower_info_control.appendChild(qd_lower_info_control_button);
         }
@@ -149,9 +164,9 @@ const getData = async (url, id) => {
       const qd_question_created_time = document.getElementById(
         "qd_question_created_time"
       );
-      qd_question_created_time.datetime = question_data.created_at;
+      qd_question_created_time.datetime = question_data.createdDate;
 
-      let diff = Math.floor(getDateDiff(question_data.created_at, today));
+      let diff = Math.floor(getDateDiff(question_data.createdDate, today));
       diff === 0
         ? (qd_question_created_time.innerText = "Today")
         : diff === 1
@@ -161,8 +176,8 @@ const getData = async (url, id) => {
       const qd_question_modified_time = document.getElementById(
         "qd_question_modified_time"
       );
-      qd_question_modified_time.datetime = question_data.modified_at;
-      diff = Math.floor(getDateDiff(question_data.modified_at, today));
+      qd_question_modified_time.datetime = question_data.modifiedDate;
+      diff = Math.floor(getDateDiff(question_data.modifiedDate, today));
       diff === 0
         ? (qd_question_modified_time.innerText = "Today")
         : diff === 1
