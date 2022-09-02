@@ -6,8 +6,11 @@ import PreProject.StackOverFlow.member.entity.Member;
 import PreProject.StackOverFlow.voteMember.entity.VoteMember;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +62,17 @@ public class Question extends BaseTimeEntity {
     // Answer : Question 테이블 간의 N:1 연관관계 매핑을 위한 JPA 일대다 설정
     @Builder.Default
     @OneToMany(mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
-    private List<Answer> answers = new ArrayList<>();
+    public List<Answer> answers = new ArrayList<>();
+
+//    @Column(columnDefinition = )
+//    private LocalDateTime activeDate;
+//    @CreatedDate
+//    public LocalDateTime createdDate;
+//
+//    @LastModifiedDate
+//    public LocalDateTime modifiedDate;
+//
+//    private LocalDateTime activeDate = createdDate;
 
     public void setQuestion_tags(List<Question_Tag> tags){
         this. question_tags = tags;

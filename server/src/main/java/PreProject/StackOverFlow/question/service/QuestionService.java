@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,16 +43,21 @@ public class QuestionService {
         return finded;
     }
 
-    public Page<Question> get_list_Service(int page, int size, String sort_Keyword) {
+    public Page<Question> get_list_Service(int page, int size, String sort_Keyword, String search_Keyword) {
         String sortValue;
 
-        if(sort_Keyword.equals("Active")) {
-
-        }
-
         Page<Question> response;
-        response = questionRepository.findAll(PageRequest.of(page - 1, size,
-                Sort.by("questionId").descending()));
+//        if(sort_Keyword.equals("Active")) {
+//            // 각 Question의 modified와 answers의 modified들을 비교해 가장 나중의 것을 찾는다.
+//            LocalDateTime activeDate;
+//        }
+        if(sort_Keyword.equals("Unanswered")) {
+            response = questionRepository.findAllByAnswersIsNullAndTitleContaining(search_Keyword ,PageRequest.of(page - 1, size,
+                    Sort.by("vote").descending()));
+        } else {
+            response = questionRepository.findByTitleContaining(search_Keyword ,PageRequest.of(page - 1, size,
+                    Sort.by("questionId").descending()));
+        }
 
         return response;
     }

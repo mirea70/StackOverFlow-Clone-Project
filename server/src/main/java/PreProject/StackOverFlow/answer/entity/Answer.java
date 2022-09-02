@@ -40,7 +40,7 @@ public class Answer extends BaseTimeEntity {
     private Question question;
 
     // Answer : Member 테이블 간의 N:1 연관관계 매핑을 위한 JPA 다대일 설정
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 

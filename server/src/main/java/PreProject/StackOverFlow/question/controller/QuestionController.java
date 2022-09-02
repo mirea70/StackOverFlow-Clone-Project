@@ -70,9 +70,11 @@ public class QuestionController {
                                     @RequestParam("page") int page,
                                     @ApiParam(value="페이지 크기", required=true, example="10")
                                     @RequestParam("size") int size,
+                                   @ApiParam(value="정렬 옵션", required=true, example="Newest")
+                                       @RequestParam("sort_Keyword") String search_Keyword,
                                     @ApiParam(value="정렬 옵션", required=true, example="Newest")
                                     @RequestParam("sort_Keyword") String sort_Keyword) {
-        Page<Question> page_list = questionService.get_list_Service(page,size, sort_Keyword);
+        Page<Question> page_list = questionService.get_list_Service(page,size, sort_Keyword, search_Keyword);
         System.out.println("page_list = " + page_list.getSize());
         List<Question> finded_list = page_list.getContent();
         System.out.println("page_list = " + finded_list.size());
