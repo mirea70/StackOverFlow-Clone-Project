@@ -10,5 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     Page<Question> findAllByAnswersIsNullAndTitleContaining(String keyword, Pageable pageable);
 
-    Page<Question> findByTitleContaining(String keyword, Pageable pageable);
+    Page<Question> findAllByTitleContaining(String keyword, Pageable pageable);
 }

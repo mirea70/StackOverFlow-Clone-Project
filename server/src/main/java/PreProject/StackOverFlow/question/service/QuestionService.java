@@ -53,11 +53,14 @@ public class QuestionService {
 //        }
         if(sort_Keyword.equals("Unanswered")) {
             response = questionRepository.findAllByAnswersIsNullAndTitleContaining(search_Keyword ,PageRequest.of(page - 1, size,
-                    Sort.by("vote").descending()));
+                    Sort.by("vote", "questionId").descending()));
         } else {
-            response = questionRepository.findByTitleContaining(search_Keyword ,PageRequest.of(page - 1, size,
+            response = questionRepository.findAllByTitleContaining(search_Keyword ,PageRequest.of(page - 1, size,
                     Sort.by("questionId").descending()));
         }
+
+//        response = questionRepository.findAll(PageRequest.of(page - 1, size,
+//                    Sort.by("questionId").descending()));
 
         return response;
     }
