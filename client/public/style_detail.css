@@ -252,3 +252,20 @@
   font-size: 13px;
   background-color: #fdf7e2;
 }
+
+.qd_lower_info_users {
+  margin: 4px 0px;
+  padding: 5px 6px 7px 7px;
+  font-size: 12px;
+  background-color: #d9e9f7;
+  border-radius: 0.5em;
+  width: 200px;
+}
+
+.qd_lower_info_users_time {
+  margin: 1px 0px 4px 0px;
+  color: #7d8790;
+}
+.qd_lower_info_users_details_name {
+  margin-left: 8px;
+}

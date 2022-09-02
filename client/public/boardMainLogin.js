@@ -1,7 +1,7 @@
 const getQuestion = async () => {
   const page = 1;
   await fetch(
-    `http://ec2-15-165-63-80.ap-northeast-2.compute.amazonaws.com:8080/questions/list?page=${page}&size=10`
+    `http://ec2-15-165-63-80.ap-northeast-2.compute.amazonaws.com:8080/questions/list?page=${page}&size=10&sort_Keyword=%20`
   )
     .then((res) => {
       return res.json();
