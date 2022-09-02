@@ -45,6 +45,8 @@ public interface CommentMapper {
             response.answerId(comment.getAnswer().getAsnwerId());
             response.memberId(comment.getMember().getMemberId());
             response.contents(comment.getContents());
+            response.createdDate(comment.getCreatedDate());
+            response.modifiedDate(comment.getModifiedDate());
             return response.build();
         }
     }

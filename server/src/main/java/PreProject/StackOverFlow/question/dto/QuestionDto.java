@@ -7,6 +7,8 @@ import PreProject.StackOverFlow.question.entity.Question_Tag;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -20,6 +22,8 @@ public class QuestionDto {
     public static class Response {
         @ApiModelProperty(notes = "질문 식별 번호", example = "1")
         private Long questionId;
+        @ApiModelProperty(value = "질문 등록한 회원 식별번호", required = true, example = "2")
+        private Long memberId;
         @ApiModelProperty(notes = "제목", example = "제목1")
         private String title;
         @ApiModelProperty(notes = "내용", example = "내용1")
@@ -34,6 +38,10 @@ public class QuestionDto {
         private List<AnswerDto.Response> answers;
         @ApiModelProperty(value = "채택 여부 값", example = "1")
         private int checked;
+        @ApiModelProperty(value = "최초 생성 날짜", example = "2022-09-02 15:22:52.0")
+        private LocalDateTime createdDate;
+        @ApiModelProperty(value = "마지막 수정 날짜", example = "2022-09-02 15:22:52.0")
+        private LocalDateTime modifiedDate;
     }
 
 //    @Builder
@@ -57,7 +65,7 @@ public class QuestionDto {
     @Getter
     @Setter
     public static class Post {
-        @ApiModelProperty(value = "질문 등록한 회원 식별번호", required = true, example = "2")
+        @ApiModelProperty(value = "질문 등록할 회원 식별번호", required = true, example = "2")
         private Long memberId;
         @ApiModelProperty(value = "제목", required = true, example = "제목1")
         private String title;

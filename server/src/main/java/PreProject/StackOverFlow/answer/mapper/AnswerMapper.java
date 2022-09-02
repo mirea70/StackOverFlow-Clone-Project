@@ -47,6 +47,8 @@ public interface AnswerMapper {
             response.contents(answer.getContents());
             response.vote(answer.getVote());
             response.comments(this.commentListToResponseList(answer.getComments()));
+            response.createdDate(answer.getCreatedDate());
+            response.modifiedDate(answer.getModifiedDate());
             return response.build();
         }
     }
@@ -76,6 +78,8 @@ public interface AnswerMapper {
             response.answerId(comment.getAnswer().getAsnwerId());
             response.memberId(comment.getMember().getMemberId());
             response.contents(comment.getContents());
+            response.createdDate(comment.getCreatedDate());
+            response.modifiedDate(comment.getModifiedDate());
             return response.build();
         }
     }

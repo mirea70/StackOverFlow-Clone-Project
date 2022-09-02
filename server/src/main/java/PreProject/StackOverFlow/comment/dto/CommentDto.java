@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 public class CommentDto {
 
@@ -24,6 +26,10 @@ public class CommentDto {
         private Long answerId;
         @ApiModelProperty(notes = "댓글 등록한 회원 식별번호", example = "2")
         private Long memberId;
+        @ApiModelProperty(value = "최초 생성 날짜", example = "2022-09-02 15:22:52.0")
+        private LocalDateTime createdDate;
+        @ApiModelProperty(value = "마지막 수정 날짜", example = "2022-09-02 15:22:52.0")
+        private LocalDateTime modifiedDate;
     }
 
     @ApiModel(value = "CommentPostDto",description = "댓글 작성 모델")

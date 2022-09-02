@@ -64,6 +64,7 @@ public interface QuestionMapper {
         } else {
             QuestionDto.Response.ResponseBuilder response = QuestionDto.Response.builder();
             response.questionId(question.getQuestionId());
+            response.memberId(question.getMember().getMemberId());
             response.title(question.getTitle());
             response.contents(question.getContents());
             response.vote(question.getVote());
@@ -71,6 +72,8 @@ public interface QuestionMapper {
             response.questionTagNames(question.getQuestionTagNames());
             response.answers(this.answerListToResponseList(question.getAnswers()));
             response.checked(question.getChecked());
+            response.createdDate(question.getCreatedDate());
+            response.modifiedDate(question.getModifiedDate());
             return response.build();
         }
     }
@@ -118,6 +121,8 @@ public interface QuestionMapper {
             response.memberId(answer.getMember().getMemberId());
             response.questionId(answer.getQuestion().getQuestionId());
             response.comments(this.commentListToResponseList(answer.getComments()));
+            response.createdDate(answer.getCreatedDate());
+            response.modifiedDate(answer.getModifiedDate());
             return response.build();
         }
     }
