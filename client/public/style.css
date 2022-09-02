@@ -15,7 +15,9 @@ body {
 a {
   text-decoration: none;
 }
-
+.hide {
+  display: none;
+}
 /*네비 영역 시작*/
 nav > div {
   display: block;
@@ -73,6 +75,17 @@ nav {
 }
 .nav-link:hover {
   background-color: #e3e6e8;
+}
+.membericon {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  border: 1px solid grey;
+}
+.name {
+  width: 100px;
+  text-align: left;
+  margin-left: 5px;
 }
 /*네비 영역 종료*/
 
@@ -317,10 +330,10 @@ nav {
 /* main css 시작 */
 main {
   background-color: #ffffff;
-  border: solid black 2px;
   display: flex;
   justify-content: center;
   align-items: stretch;
+  min-width: 900px;
 }
 
 #main_left_container {
@@ -399,18 +412,23 @@ main {
   border-left: 1px solid #d6d9dc;
   max-width: 1100px;
   width: calc(100% - 164px);
-  padding: 24px 0px;
+  padding: 24px 16px;
   display: flex;
 }
 /* main 오른쪽 css끝 */
 
+/* main css 끝 */
+
+.question_list_container {
+  display: flex;
+  flex-direction: column;
+}
 /* 게시글 */
 .qd_left_container {
   width: 75%;
 }
 .qd_rigth_container {
   width: 25%;
-  background-color: blue;
 }
 .Toptitle {
   height: 150px;
@@ -580,7 +598,3 @@ main {
   display: none;
 }
 /* 게시글 */
-
-
-
-/* main css 끝 */

@@ -1,12 +1,13 @@
 let boardList = document.querySelector(".boardList")
 let boardSoket = document.querySelector(".boardSoket")
 let gesipanPage = document.querySelector(".gesipan_page")
+const board = []
 
 
 const converter = function (x) {
     const boardContent = document.createElement("div")
     boardContent.className = "boardContent"
-    boardContent.id = board[x].question_id
+    boardContent.id = board[x].questionId
     const boardView = document.createElement("div")
     boardView.className = "boardView"
     boardView.textContent = board[x].view + ' views'
@@ -21,28 +22,28 @@ const converter = function (x) {
     boardtext.textContent = board[x].contents
     const tagMaker = document.createElement("div")
     tagMaker.className = "tagMaker"
-    const boardTag = document.createElement("div")
-    boardTag.classList = "boardTag"
-    var abc = board[x].tags.split(" ")
-    for(let i = 0 ; i < abc.length ; i++) {
-      var newtag = document.createElement("div")
-      newtag.className = "tag"
-      newtag.textContent = abc[i]
-      boardTag.append(newtag)
-    }
-    const boardMaker = document.createElement("div")
-    boardMaker.classList = "boardMaker"
-    const makerName = document.createElement("div")
-    makerName.classList = "makerName"
-    makerName.textContent = board[x].writer
-    const asked = document.createElement("div")
-    asked.textContent = "asked"
-    const makerTime = document.createElement("div")
-    makerTime.classList = "makerTime"
-    makerTime.textContent = board[x].created_at
+    // const boardTag = document.createElement("div")
+    // boardTag.classList = "boardTag"
+    // var abc = board[x].tags.split(" ")
+    // for(let i = 0 ; i < abc.length ; i++) {
+    //   var newtag = document.createElement("div")
+    //   newtag.className = "tag"
+    //   newtag.textContent = abc[i]
+    //   boardTag.append(newtag)
+    // }
+    // const boardMaker = document.createElement("div")
+    // boardMaker.classList = "boardMaker"
+    // const makerName = document.createElement("div")
+    // makerName.classList = "makerName"
+    // makerName.textContent = board[x].writer
+    // const asked = document.createElement("div")
+    // asked.textContent = "asked"
+    // const makerTime = document.createElement("div")
+    // makerTime.classList = "makerTime"
+    // makerTime.textContent = board[x].created_at
     boardMaker.append(makerName, asked, makerTime)
     tagMaker.append(boardTag, boardMaker)
-    boardMain.append(boardtitle, boardtext, tagMaker)
+    boardMain.append(boardtitle, boardtext, /*tagMaker*/)
     boardContent.append(boardView, boardMain)
     boardSoket.append(boardContent)
 }
@@ -78,10 +79,21 @@ const renderButton = (x) => {
     }
 }
 
-render(0)
-renderButton(0)
 
+const getDiscussion = () => {
+  return  fetch ("http://ec2-15-165-63-80.ap-northeast-2.compute.amazonaws.com:8080/questions/list?page=1&size=10&sort_Keyword=Newest")
+    .then((res) => res.json())
+    .then((result) => {
+      console.log(result.data);
+      console.log(result.data.length);
+      board.push(result.data[0]);
+      console.log(board);
+      render(0)
+      renderButton(0)
+    });
+};
 
+getDiscussion()
 
 let def = document.querySelectorAll(".gesipan_button")
     def.forEach.call(def, function(e) {
