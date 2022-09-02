@@ -31,8 +31,25 @@ const getData = async (url, id) => {
         localStorage.setItem("edit_target_data", JSON.stringify(data));
         location.href = "ask.html";
       };
-      const handleDelete = (question_id) => {
+      const handleDelete = async (question_id) => {
         alert("삭제합니다.");
+        await fetch(
+          `http://ec2-15-165-63-80.ap-northeast-2.compute.amazonaws.com:8080/questions/${question_id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        ).then((res) => {
+          if (res.status === 200 || res.status === 204) {
+            alert("질문 삭제 완료");
+            localStorage.removeItem("key");
+            location.href = "boardMainLogin.html";
+          } else {
+            alert("질문 삭제 실패");
+          }
+        });
         //삭제 fetch 요청//
       };
       // --- edit, delete 함수 구현
@@ -93,7 +110,8 @@ const getData = async (url, id) => {
             qd_lower_info_control_button.onclick = () => handleEdit(data);
           }
           if (button === "Delete") {
-            qd_lower_info_control_button.onclick = () => handleDelete();
+            qd_lower_info_control_button.onclick = () =>
+              handleDelete(data.questionId);
           }
           qd_lower_info_control.appendChild(qd_lower_info_control_button);
         }
