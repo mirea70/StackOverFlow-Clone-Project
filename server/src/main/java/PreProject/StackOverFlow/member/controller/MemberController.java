@@ -37,12 +37,10 @@ public class MemberController {
     @ApiOperation(value = "로그인", notes = "로그인한 유저의 정보 반환", response = MemberDto.Response.class)
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody MemberDto.Login login){
-        Member member = memberService.loginService(login);
+        Member member = memberService.loginService(memberMapper.loginToMember(login));
         try{
-            System.out.println(member.getEmail());
-            return new ResponseEntity<>(member, HttpStatus.OK);
+            return new ResponseEntity<>(memberMapper.memberToMemberResponse(member), HttpStatus.OK);
         }catch (BusinessLogicException e){
-            System.out.println(member.getEmail());
             return new ResponseEntity<>("different", HttpStatus.BAD_REQUEST);
         }
     }

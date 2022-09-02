@@ -40,20 +40,24 @@ public class Question extends BaseTimeEntity {
 
     private String questionTagNames;
 
+    @Builder.Default
     private int checked = 0;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
+    @Builder.Default
     @OneToMany(mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
     private List<VoteMember> voteMemberList = new ArrayList<>();
 
     // Tag : Question 테이블 간의 N:N 연관관계 매핑을 위한 JPA 일대다 설정
+    @Builder.Default
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question_Tag> question_tags = new ArrayList<>();
 
     // Answer : Question 테이블 간의 N:1 연관관계 매핑을 위한 JPA 일대다 설정
+    @Builder.Default
     @OneToMany(mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
     private List<Answer> answers = new ArrayList<>();
 

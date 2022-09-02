@@ -42,9 +42,18 @@ public class QuestionService {
         return finded;
     }
 
-    public Page<Question> get_list_Service(int page, int size) {
-        return questionRepository.findAll(PageRequest.of(page - 1, size,
+    public Page<Question> get_list_Service(int page, int size, String sort_Keyword) {
+        String sortValue;
+
+        if(sort_Keyword.equals("Active")) {
+
+        }
+
+        Page<Question> response;
+        response = questionRepository.findAll(PageRequest.of(page - 1, size,
                 Sort.by("questionId").descending()));
+
+        return response;
     }
 
     public void modify_Service(Question question) {

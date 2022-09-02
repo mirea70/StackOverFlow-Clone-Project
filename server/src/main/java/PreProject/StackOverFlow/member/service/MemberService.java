@@ -36,17 +36,19 @@ public class MemberService {
 //    }
 
     // login logic 변경
-    public Member loginService(MemberDto.Login login){
-        Optional<Member> optionalMember = memberRepository.findByEmail(login.getEmail());
+    public Member loginService(Member member){
+        Optional<Member> optionalMember = memberRepository.findByEmail(member.getEmail());
 
-        Member member = optionalMember.orElseThrow(() ->
+        Member findMember = optionalMember.orElseThrow(() ->
                 new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        if(!member.getPassword().equals(login.getPassword())){
+        if(!member.getPassword().equals(member.getPassword())){
             throw new BusinessLogicException("비밀번호가 일치하지 않습니다.");
         }
 
-        return member;
+
+
+        return findMember;
     }
 
     // 기존의 create() 메서드를 변경하였습니다.
