@@ -11,3 +11,8 @@ if(email) {
   postButton.classList.add('hide')
 }
 
+const handleLogout = () => {
+  alert("로그아웃합니다.");
+  localStorage.clear();
+  location.href ="index.html"
+};

@@ -24,7 +24,10 @@ const converter = function (x) {
     })
     const boardtext = document.createElement("div")
     boardtext.className = "boardtext"
-    boardtext.textContent = board[x].contents
+    var text = board[x].contents
+    text = text.replace('<p>', '') 
+    text = text.replace('</p>', '')
+    boardtext.textContent = text
     const tagMaker = document.createElement("div")
     tagMaker.className = "tagMaker"
     const boardTag = document.createElement("div")
