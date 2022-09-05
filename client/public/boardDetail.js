@@ -67,16 +67,37 @@ const getData = async (url, id) => {
       };
       // --- edit, delete 함수 구현
 
+      const question_vote = async (changer, target, data) => {
+        const user = localStorage.getItem("memberId");
+        let target_id;
+        target === "question"
+          ? (target_id = data.questionId)
+          : (target_id = data.memberId);
+        const vote_url = `http://ec2-15-165-63-80.ap-northeast-2.compute.amazonaws.com:8080/${target}s/${changer}/${target_id}?memberId=${user}`;
+        await fetch(vote_url, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then((res) => {
+          if (res.status === 200) {
+            window.location.reload();
+          }
+        });
+      };
+
       //투표 컨테이터 및 컨테이너 렌더링 위한 함수 구현
       const makeVoteBar = (target, data, parent) => {
         const qd_lower_vote = document.createElement("div");
         qd_lower_vote.className = `qd_lower_vote qd_lower_${target}_vote`;
         const vote_up = document.createElement("i");
         vote_up.className = "fa-solid fa-caret-up fa-3x";
+        vote_up.onclick = () => question_vote("upVote", target, data);
         const vote_span = document.createElement("span");
         vote_span.innerText = data.vote;
         const vote_down = document.createElement("i");
         vote_down.className = "fa-solid fa-caret-down fa-3x";
+        vote_down.onclick = () => question_vote("downVote", target, data);
         qd_lower_vote.append(vote_up, vote_span, vote_down);
         parent.appendChild(qd_lower_vote);
       };
