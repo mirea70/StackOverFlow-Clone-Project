@@ -185,7 +185,7 @@ const getData = async (url, id) => {
               const qd_lower_info_users_details_img =
                 document.createElement("img");
               //임시값 ---------------
-              memberData.profile_imgae = "https://picsum.photos/id/1/32/32";
+              // memberData.profile_imgae = "https://picsum.photos/id/1/32/32";
               //----------임시값
               qd_lower_info_users_details_img.src = memberData.profile_imgae;
               const qd_lower_info_users_details_name =
