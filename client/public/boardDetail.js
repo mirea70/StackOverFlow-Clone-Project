@@ -99,7 +99,7 @@ const getData = async (url, id) => {
               qd_lower_content.innerHTML = data.contents;
               qd_lower_content_wrapper.appendChild(qd_lower_content);
 
-              if (target === "question") {
+              if (target === "question" && data.questionTagNames !== "") {
                 const qd_lower_tags = document.createElement("div");
                 qd_lower_tags.className = "qd_lower_tags";
                 const tags = data.questionTagNames.split(" ");
