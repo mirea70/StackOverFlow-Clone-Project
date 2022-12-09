@@ -50,7 +50,7 @@
   
 # :sparkler: 기술스택
 <p align="left"> 
-  <img src="https://user-images.githubusercontent.com/101246806/206637413-8970653e-5ed0-4ae6-bac4-4c08c5585c83.png" width= "800"/>
+  <img src="https://user-images.githubusercontent.com/101246806/206642915-17915aba-51d2-45a4-944d-f7d4ecee54fe.png" width= "800"/>
 </p>
   
 <br/>
