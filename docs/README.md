@@ -18,6 +18,66 @@
     <h3> 프로젝트 기간 : 2022.08.22 ~ 2022.09.06 </h3>
 </div>
 <br/>
+
+# 💨 구현한 기능
+### - 회원가입
+<p align="left"> 
+  <img src="https://user-images.githubusercontent.com/101246806/211681501-2e43ef8a-2e3d-440b-9c11-a6db2b68e1df.png">
+</p>
+
+- Sigh up 버튼을 눌러 회원가입을 진행합니다. 체크박스를 포함하여 하나라도 입력이 안되면 가입이 진행되지 않습니다.
+
+  <br/>
+
+### - 로그인
+<p align="left"> 
+  <img src="https://user-images.githubusercontent.com/101246806/211681590-10c7a003-db22-444d-929f-761e6b528051.png">
+</p> 
+
+- 회원가입한 정보를 토대로 로그인을 진행합니다.
+- 비밀번호는 보안을 위해 마스킹처리 하였습니다.
+
+ <br/>
+
+### - 게시글 등록
+<p align="left"> 
+  <img src="https://user-images.githubusercontent.com/101246806/211681750-ac8e318c-f591-4072-aa77-1b8b46668a3c.png">
+</p> 
+
+- Ask question 버튼을 누르면 ask.html로 넘어가 다음 화면처럼 나옵니다.
+- 정보를 입력하고 submit을 누르면 데이터베이스에 저장이 됨과 동시에 boardMain 페이지로 이동합니다.
+- 원하는 태그를 공백 단위로 입력하여 추가할 수 있도록 구현하였습니다.
+- 태그 부분은 타 기능들을 완성 후, 보완하려 하였으나 시간 부족 관계로 마무리하게 되었습니다.
+
+ <br/>
+
+### - 게시글 조회
+<p align="left"> 
+  <img src="https://user-images.githubusercontent.com/101246806/211681841-3c3143a6-a73f-4419-987d-378bbaa8ed1b.png">
+</p> 
+
+- 위 화면처럼 나타나고 제목부분을 누르면 해당 게시글을 자세히 볼 수 있습니다.
+- 작성자의 정보와 작성 시간이 나타납니다. 아래에 답글을 작성할 수도 있습니다.
+
+<br/>
+
+### - 답글 작성
+<p align="left"> 
+  <img src="https://user-images.githubusercontent.com/101246806/211681914-9d994abc-206b-44b5-a61e-7513d80cd6b8.png">
+</p>
+
+<br/>
+
+### - 질문 및 답글의 수정/삭제
+<p align="left"> 
+  <img src="https://user-images.githubusercontent.com/101246806/211682088-c72f75cc-9040-4e04-81b3-ab0f4dead797.png">
+</p> 
+
+- 질문 게시글과 답글이 등록된 후, 위의 Edit 버튼을 누르면 수정이 가능합니다.
+- Delete 버튼을 누르면 각각 삭제가 가능합니다.
+- 모두 작성자 본인일 경우에만 가능합니다.
+
+<br/>
   
 # :information_desk_person: 팀 인원
 <p align="center"> 
